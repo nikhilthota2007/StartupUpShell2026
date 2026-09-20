@@ -44,6 +44,8 @@ Built for a reviewer with ten minutes and no expertise in any of these domains:
   Newsreader serif body, monospace only where it carries meaning.
 - Full entries and brief entries use deliberately different layouts, so the page
   has rhythm rather than one repeated module.
+- The page commits to a single light theme: warm paper, dark ink. It renders the
+  same way whether or not the viewer's system is set to dark mode.
 
 ## Running it
 

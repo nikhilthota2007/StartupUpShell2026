@@ -22,7 +22,7 @@
   --rule:#D6D1C0;
   --rule-soft:#E2DED0;
   --blue:#1A34B8;
-  --field:#1A34B8;
+  --field:#DFE3F7;
   --orange:#EE4B28;
   --grain-blend:multiply;
   --grain-opacity:.075;
@@ -31,39 +31,6 @@
   --serif:"Newsreader","Iowan Old Style",Georgia,"Times New Roman",serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme: dark;
-    --paper:#14130F;
-    --paper-2:#1F1D17;
-    --ink:#F0EDE2;
-    --ink-2:#C6BFAE;
-    --muted:#8C8471;
-    --rule:#2F2C23;
-    --rule-soft:#25231C;
-    --blue:#8FA2FF;
-    --field:#1B2C8E;
-    --orange:#FF7A55;
-    --grain-blend:screen;
-    --grain-opacity:.05;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme: dark;
-  --paper:#14130F;
-  --paper-2:#1F1D17;
-  --ink:#F0EDE2;
-  --ink-2:#C6BFAE;
-  --muted:#8C8471;
-  --rule:#2F2C23;
-  --rule-soft:#25231C;
-  --blue:#8FA2FF;
-  --field:#1B2C8E;
-  --orange:#FF7A55;
-  --grain-blend:screen;
-  --grain-opacity:.05;
-}
-
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
@@ -257,17 +224,18 @@ body::after{
 /* ---------- Liquid, the loud one ---------- */
 .feature{
   --paper:var(--field);
-  --paper-2:rgba(255,255,255,.11);
-  --ink:#FBF8F0;
-  --ink-2:rgba(251,248,240,.87);
-  --muted:rgba(251,248,240,.62);
-  --rule:rgba(251,248,240,.26);
-  --rule-soft:rgba(251,248,240,.16);
-  --blue:#FFC9B8;
-  --orange:#FFAF93;
+  --paper-2:rgba(26,52,184,.08);
+  --ink:#141327;
+  --ink-2:#3C3A56;
+  --muted:#6C6A86;
+  --rule:rgba(26,52,184,.24);
+  --rule-soft:rgba(26,52,184,.13);
+  --orange:#C93B18;
   background:var(--field);color:var(--ink);
+  border-block:2px solid var(--blue);
   margin-block:clamp(40px,5vw,66px);padding-block:clamp(46px,6vw,74px);
 }
+.feature h3{color:var(--blue)}
 .feature .entry{border-top:0;padding-block:0}
 .feature .shot img{border-color:var(--rule)}
 .feature .live{
@@ -275,8 +243,8 @@ body::after{
   display:inline-flex;align-items:center;gap:9px;margin:0 0 15px;
 }
 .feature .live::before{
-  content:"";width:9px;height:9px;border-radius:50%;background:#9CF5C0;
-  box-shadow:0 0 0 4px rgba(156,245,192,.24);
+  content:"";width:9px;height:9px;border-radius:50%;background:#0E9B4C;
+  box-shadow:0 0 0 4px rgba(14,155,76,.18);
 }
 /* content-sized, unequal: not a tile grid */
 .proof{
