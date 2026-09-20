@@ -22,7 +22,6 @@
   --rule:#D6D1C0;
   --rule-soft:#E2DED0;
   --blue:#1A34B8;
-  --field:#DFE3F7;
   --orange:#EE4B28;
   --grain-blend:multiply;
   --grain-opacity:.075;
@@ -51,7 +50,7 @@ body::after{
 }
 
 .wrap{max-width:1120px;margin:0 auto;padding-inline:24px}
-.entry,.opener,.feature,.toc,.why{scroll-margin-top:66px}
+.entry,.opener,.toc,.why{scroll-margin-top:66px}
 
 /* ---------- bar ---------- */
 .bar{
@@ -221,31 +220,6 @@ body::after{
 }
 .quote p i{font-style:normal;color:var(--blue)}
 
-/* ---------- Liquid, the loud one ---------- */
-.feature{
-  --paper:var(--field);
-  --paper-2:rgba(26,52,184,.08);
-  --ink:#141327;
-  --ink-2:#3C3A56;
-  --muted:#6C6A86;
-  --rule:rgba(26,52,184,.24);
-  --rule-soft:rgba(26,52,184,.13);
-  --orange:#C93B18;
-  background:var(--field);color:var(--ink);
-  border-block:2px solid var(--blue);
-  margin-block:clamp(40px,5vw,66px);padding-block:clamp(46px,6vw,74px);
-}
-.feature h3{color:var(--blue)}
-.feature .entry{border-top:0;padding-block:0}
-.feature .shot img{border-color:var(--rule)}
-.feature .live{
-  font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink);
-  display:inline-flex;align-items:center;gap:9px;margin:0 0 15px;
-}
-.feature .live::before{
-  content:"";width:9px;height:9px;border-radius:50%;background:#0E9B4C;
-  box-shadow:0 0 0 4px rgba(14,155,76,.18);
-}
 /* content-sized, unequal: not a tile grid */
 .proof{
   display:flex;flex-wrap:wrap;gap:2px 44px;margin:28px 0 0;padding:0;
@@ -468,11 +442,10 @@ footer .lk{font-size:14.5px}
     <p>One company taking payments today, one I'm pushing through a licensing process, and two ideas behind them.</p>
   </section>
 
-  <section class="feature">
-    <div class="wrap">
-      <article class="entry" id="liquid">
-        <p class="live">Live, and processing payments today</p>
-        <h3>Liquid</h3>
+  <div class="wrap">
+
+    <article class="entry" id="liquid">
+      <h3>Liquid</h3>
         <p class="tagline">A mobile wallet for College Park</p>
         <p class="tag"><b>Co-founded with Pranav Puranik</b> &middot; incorporated in Maryland, approved by Stripe</p>
         <p class="stack">React Native / Stripe Connect / Maryland LLC</p>
@@ -524,14 +497,10 @@ footer .lk{font-size:14.5px}
           <p><strong class="lead-in warn">The failure worth naming.</strong> Early on I counted verbal commitments from owners as signed partners, and built a launch timeline on top of them. An enthusiastic yes in a conversation is worth close to nothing until there is a signed merchant agreement and a configured terminal. We rebuilt the pipeline so that signatures and live transactions are the only milestones that count.</p>
 
           <p>Next is student-to-student transfers and delivery, so the wallet becomes the default way money moves on campus rather than a discount card.</p>
-        </div>
-      </article>
-    </div>
-  </section>
+      </div>
+    </article>
 
-  <div class="wrap">
-
-    <article class="entry" id="ride-rite" style="border-top:0">
+    <article class="entry" id="ride-rite">
       <h3>Ride Rite</h3>
       <p class="tagline">Zero-commission ride-hailing for New York's yellow taxis</p>
       <p class="tag"><b>In progress</b> &middot; app built, pursuing the E-Hail license</p>

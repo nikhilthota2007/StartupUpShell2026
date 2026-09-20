@@ -62,7 +62,8 @@ Built for a reviewer with ten minutes and no expertise in any of these domains:
   beside the paragraph that uses it.
 - A print direction: paper grain, two spot inks (federal blue and riso orange),
   and a misregistered overprint on one headline word. Archivo grotesque over a
-  Newsreader serif body, monospace only where it carries meaning.
+  Newsreader serif body, monospace only where it carries meaning. Every section
+  sits on the same paper; no section gets its own colour.
 - Full entries and brief entries use deliberately different layouts, so the page
   has rhythm rather than one repeated module.
 - The page commits to a single light theme: warm paper, dark ink. It renders the
