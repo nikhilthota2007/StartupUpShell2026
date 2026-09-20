@@ -33,7 +33,7 @@ bottom of the file, and paste a URL between the quotes:
 var LINKS = {
   github:         "https://github.com/nikhilthota2007",
   linkedin:       "",   // e.g. https://www.linkedin.com/in/your-handle
-  liquid:         "",   // Liquid's site, App Store page, or TestFlight invite
+  liquid:         "https://liquidwallet.co",
   smartmoney:     "",   // the deployed SmartMoney app
   smartmoneyRepo: "",   // the SmartMoney repository
   riderite:       ""    // the Ride Rite repository
