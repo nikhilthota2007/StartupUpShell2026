@@ -168,6 +168,12 @@ body::after{
   .sidenote{float:right;clear:right;width:246px;margin:6px -282px 24px 0}
 }
 
+/* ---------- screenshot pair ---------- */
+.pair{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin:30px 0 26px}
+.pair .shot{margin:0;flex:0 1 216px;max-width:216px}
+.pair .shot img{width:100%}
+@media (max-width:520px){ .pair{gap:12px} .pair .shot{flex:1 1 140px} }
+
 /* ---------- diagrams ---------- */
 .diagram{margin:32px 0 28px;max-width:600px}
 .diagram figcaption{
@@ -426,6 +432,18 @@ footer .lk{font-size:14.5px}
       <div class="prose">
         <p class="big">Our volunteer recruitment website was written for us, not for the person considering applying. I rebuilt it around them, and applications rose 50%.</p>
 
+        <figure class="shot wide tilt-a">
+          <img src="img/station43-home.webp" alt="The West Windsor Volunteer Fire Company No. 1 home page">
+          <div class="drop">img/station43-home.webp</div>
+          <figcaption>The rebuilt home page. A hundred years of the company, and one obvious way in.</figcaption>
+        </figure>
+
+        <figure class="shot pull tilt-b">
+          <img src="img/station43-signup.png" alt="The volunteer sign-up form">
+          <div class="drop">img/station43-signup.png</div>
+          <figcaption>The application itself: name, contact, address, and little else in the way.</figcaption>
+        </figure>
+
         
 
         <p>It assumed familiarity, buried the information that mattered, and put friction in front of someone applying for the first time. I redesigned it end to end: restructured the layout, rewrote the messaging from the prospective volunteer's perspective, and stripped every unnecessary step out of the application itself. We brought in more than 20 new volunteers.</p>
@@ -483,6 +501,19 @@ footer .lk{font-size:14.5px}
 
         <div class="prose">
           <p class="big">Students load money into a campus wallet and get a discount at partner restaurants they could never get paying with a card, because we can offer merchants economics the card networks can't.</p>
+
+        <div class="pair">
+          <figure class="shot tilt-a">
+          <img src="img/liquid-wallet.webp" alt="The Liquid wallet home screen">
+          <div class="drop">img/liquid-wallet.webp</div>
+          <figcaption>Balance, the day&rsquo;s off-peak discount, and the Pay button.</figcaption>
+        </figure>
+          <figure class="shot tilt-b">
+          <img src="img/liquid-partners.webp" alt="Liquid partner locations with addresses">
+          <div class="drop">img/liquid-partners.webp</div>
+          <figcaption>The three live partners, and how far they are from campus.</figcaption>
+        </figure>
+        </div>
 
           <figure class="diagram">
           <svg class="dgm" viewBox="0 0 660 258" role="img" aria-label="Paying by card sends two to three percent of every sale to the card networks. With Liquid the student loads money before any meal, so the restaurant discounts against spend already committed.">
@@ -543,6 +574,12 @@ footer .lk{font-size:14.5px}
             <li>Pizza Kingdom</li>
             <li>Craving Hour Halal</li>
           </ul>
+
+          <figure class="shot pull tilt-a">
+          <img src="img/liquid-map.webp" alt="Map of Liquid partner locations around College Park">
+          <div class="drop">img/liquid-map.webp</div>
+          <figcaption>Partners around campus, along Baltimore Avenue.</figcaption>
+        </figure>
 
           <ul class="links" style="margin-top:24px">
             <li><a class="lk" data-link="liquid">Open Liquid</a></li>

@@ -8,34 +8,27 @@ A single-page portfolio answering the Startup Shell application prompt.
 - **Why Startup Shell** — a closing section on what I want from the community and
   what I can offer it.
 
-## Diagrams, and adding real screenshots
+## Images
 
-Four sections carry hand-authored inline SVG diagrams rather than screenshots:
+Screenshots live in `img/` and are referenced by exact filename:
 
-| Section | What it shows |
+| File | Where |
 |---|---|
-| SmartMoney | The model calls the tested library for every number, so the chat and the interface read from one source |
-| Liquid | Card payment vs Liquid payment, and where the 2-3% goes |
-| Ride Rite | Every dispatch passes through the E-Hail licence |
-| Feedback routing | The rating branch, and the Google link that is sent either way |
+| `station43-home.webp` | Station 43, the rebuilt home page |
+| `station43-signup.png` | Station 43, the sign-up form |
+| `liquid-wallet.webp` | Liquid, the wallet screen |
+| `liquid-partners.webp` | Liquid, the partner list |
+| `liquid-map.webp` | Liquid, partners on the map |
 
-They are plain `<svg>` in the page: no library, no image files, and they inherit
-the page colours. Station 43 has no diagram, because a site redesign has no
-mechanism worth drawing; it wants a real screenshot.
+Two tall phone screenshots sit side by side in a `.pair` container. Anything
+missing falls back to a labelled placeholder rather than a broken image.
 
-To add real screenshots, drop the file in `img/` and put a figure where you want
-it:
+Four sections also carry hand-authored inline SVG diagrams, which show the
+mechanism rather than the product: SmartMoney's tool-calling architecture,
+card versus Liquid payment, the Ride Rite dispatch licence, and the feedback
+rating branch. No library, no image files, colours inherited from the page.
 
-```html
-<figure class="shot tilt-a">
-  <img src="img/whatever.png" alt="...">
-  <div class="drop">img/whatever.png</div>
-  <figcaption>One line on what this shows.</figcaption>
-</figure>
-```
-
-The `.shot` styles and the script that handles a missing file are still in the
-page, so a slot falls back to a labelled placeholder rather than a broken image.
+Ride Rite has no screenshot yet. SmartMoney has a diagram but no screenshot.
 
 ## Adding your links
 
