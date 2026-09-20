@@ -8,21 +8,34 @@ A single-page portfolio answering the Startup Shell application prompt.
 - **Why Startup Shell** — a closing section on what I want from the community and
   what I can offer it.
 
-## Adding your screenshots
+## Diagrams, and adding real screenshots
 
-Drop image files into `img/` using these exact names and they appear automatically.
-Until a file exists, the page shows a labelled placeholder in its slot, so nothing
-is ever faked:
+Four sections carry hand-authored inline SVG diagrams rather than screenshots:
 
-| File | Shows |
+| Section | What it shows |
 |---|---|
-| `img/liquid-app.png` | The Liquid wallet mid-payment |
-| `img/smartmoney.png` | The debt payoff timeline |
-| `img/ride-rite.png` | The Ride Rite app |
-| `img/station43.png` | The rebuilt Station 43 page |
+| SmartMoney | The model calls the tested library for every number, so the chat and the interface read from one source |
+| Liquid | Card payment vs Liquid payment, and where the 2-3% goes |
+| Ride Rite | Every dispatch passes through the E-Hail licence |
+| Feedback routing | The rating branch, and the Google link that is sent either way |
 
-Delete any `<figure class="shot">` block you don't want rather than leaving its
-placeholder visible.
+They are plain `<svg>` in the page: no library, no image files, and they inherit
+the page colours. Station 43 has no diagram, because a site redesign has no
+mechanism worth drawing; it wants a real screenshot.
+
+To add real screenshots, drop the file in `img/` and put a figure where you want
+it:
+
+```html
+<figure class="shot tilt-a">
+  <img src="img/whatever.png" alt="...">
+  <div class="drop">img/whatever.png</div>
+  <figcaption>One line on what this shows.</figcaption>
+</figure>
+```
+
+The `.shot` styles and the script that handles a missing file are still in the
+page, so a slot falls back to a labelled placeholder rather than a broken image.
 
 ## Adding your links
 
