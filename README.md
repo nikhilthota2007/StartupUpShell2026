@@ -2,40 +2,62 @@
 
 A single-page portfolio answering the Startup Shell application prompt.
 
-- **Part 1** — past projects: SmartMoney, ReturnFlow, Ride Rite, the Station 43
-  redesign, and running sales at Klio Care. Each entry covers what I did, what I
-  learned, and the failure I overcame.
-- **Part 2** — what I'm working on: Liquid (live), a restaurant feedback-routing
-  platform, and SmartMoney expanded.
+- **Part one, what I've built** — SmartMoney, Station 43, ReturnFlow, Klio Care.
+- **Part two, what I'm working on** — Liquid (live), Ride Rite, feedback routing,
+  SmartMoney expanded.
+- **Why Startup Shell** — a closing section on what I want from the community and
+  what I can offer it.
+
+## Adding your screenshots
+
+Drop image files into `img/` using these exact names and they appear automatically.
+Until a file exists, the page shows a labelled placeholder in its slot, so nothing
+is ever faked:
+
+| File | Shows |
+|---|---|
+| `img/liquid-app.png` | The Liquid wallet mid-payment |
+| `img/smartmoney.png` | The debt payoff timeline |
+| `img/ride-rite.png` | The Ride Rite app |
+| `img/station43.png` | The rebuilt Station 43 page |
+
+Delete any `<figure class="shot">` block you don't want rather than leaving its
+placeholder visible.
+
+## Adding Liquid's numbers
+
+The single highest-impact addition. Inside the Liquid section there is a commented
+block in the `<dl class="proof">` list with transaction count and volume ready to
+uncomment once you have the real figures. No invented numbers ship in this file.
 
 ## Design notes
 
 Built for a reviewer with ten minutes and no expertise in any of these domains:
 
-- Each entry opens with a large-type standfirst, so the page skims in about two
+- Each entry opens with a large-type standfirst, so the page skims in roughly two
   minutes and reads in about nine.
 - Jargon (interchange, T+2 settlement, row-level security, money transmitter,
   avalanche/snowball, *Alice Corp.*, Plaid) is translated in margin sidenotes
   beside the paragraph that uses it.
-- Typography is a heavy grotesque (Archivo) over a warm serif body (Newsreader),
-  with monospace reserved for tech stacks, where it carries meaning.
-- Liquid gets a full-bleed ultramarine section because it is the only thing here
-  taking live payments; everything else stays on quiet warm paper.
+- A print direction: paper grain, two spot inks (federal blue and riso orange),
+  and a misregistered overprint on one headline word. Archivo grotesque over a
+  Newsreader serif body, monospace only where it carries meaning.
+- Full entries and brief entries use deliberately different layouts, so the page
+  has rhythm rather than one repeated module.
 
 ## Running it
 
 `index.html` is a single self-contained file. No build step, no dependencies.
-Open it directly, or serve the folder:
 
 ```sh
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-Only external request is the Google Fonts stylesheet (Fraunces, IBM Plex Sans,
-IBM Plex Mono); the page falls back to system serif/sans/mono without it.
+The only external request is the Google Fonts stylesheet; the page falls back to
+system serif/sans/mono without it.
 
 ## Publishing a public link
 
 Repository **Settings → Pages → Build and deployment**, set source to
-*Deploy from a branch*, pick this branch and the `/ (root)` folder. The site
-lands at `https://<username>.github.io/<repo>/`.
+*Deploy from a branch*, pick this branch and the `/ (root)` folder. The site lands
+at `https://<username>.github.io/<repo>/`.

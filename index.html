@@ -7,23 +7,25 @@
 <meta name="description" content="Nikhil Thota's portfolio for Startup Shell: four full-stack applications, one processing live payments, and what broke along the way.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
 <style>
 :root{
   color-scheme: light;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --paper:#FBF8F3;
-  --surface:#F2EBDF;
-  --ink:#191713;
-  --ink-2:#4B453B;
-  --muted:#857C6C;
-  --rule:#E2DACB;
-  --rule-soft:#EDE6D9;
-  --accent:#1B36BE;
-  --accent-bg:#1D3FD4;
-  --warn:#AA3B22;
+  --paper:#F2F0E7;
+  --paper-2:#E8E5D8;
+  --ink:#16140F;
+  --ink-2:#463F33;
+  --muted:#7E7563;
+  --rule:#D6D1C0;
+  --rule-soft:#E2DED0;
+  --blue:#1A34B8;
+  --field:#1A34B8;
+  --orange:#EE4B28;
+  --grain-blend:multiply;
+  --grain-opacity:.075;
 
   --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
   --serif:"Newsreader","Iowan Old Style",Georgia,"Times New Roman",serif;
@@ -32,243 +34,287 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme: dark;
-    --paper:#121110;
-    --surface:#1E1B16;
-    --ink:#F3EEE4;
-    --ink-2:#CAC2B4;
-    --muted:#928975;
-    --rule:#2D2921;
-    --rule-soft:#231F1A;
-    --accent:#93A9FF;
-    --accent-bg:#1B2E93;
-    --warn:#E6957A;
+    --paper:#14130F;
+    --paper-2:#1F1D17;
+    --ink:#F0EDE2;
+    --ink-2:#C6BFAE;
+    --muted:#8C8471;
+    --rule:#2F2C23;
+    --rule-soft:#25231C;
+    --blue:#8FA2FF;
+    --field:#1B2C8E;
+    --orange:#FF7A55;
+    --grain-blend:screen;
+    --grain-opacity:.05;
   }
 }
 :root[data-theme="dark"]{
   color-scheme: dark;
-  --paper:#121110;
-  --surface:#1E1B16;
-  --ink:#F3EEE4;
-  --ink-2:#CAC2B4;
-  --muted:#928975;
-  --rule:#2D2921;
-  --rule-soft:#231F1A;
-  --accent:#93A9FF;
-  --accent-bg:#1B2E93;
-  --warn:#E6957A;
+  --paper:#14130F;
+  --paper-2:#1F1D17;
+  --ink:#F0EDE2;
+  --ink-2:#C6BFAE;
+  --muted:#8C8471;
+  --rule:#2F2C23;
+  --rule-soft:#25231C;
+  --blue:#8FA2FF;
+  --field:#1B2C8E;
+  --orange:#FF7A55;
+  --grain-blend:screen;
+  --grain-opacity:.05;
 }
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--serif);
-  font-size:18px;
-  line-height:1.62;
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:18px;line-height:1.62;
   -webkit-font-smoothing:antialiased;
 }
-img{max-width:100%}
+img{max-width:100%;display:block}
 [hidden]{display:none !important}
-::selection{background:var(--accent-bg);color:#FBF8F3}
+::selection{background:var(--orange);color:#FFF6F2}
 
-.wrap{max-width:1080px;margin:0 auto;padding-inline:22px}
-.entry,.opener,.feature,.toc{scroll-margin-top:66px}
-.measure{max-width:63ch}
+/* paper grain, the whole point of a print-set page */
+body::after{
+  content:"";position:fixed;inset:0;z-index:90;pointer-events:none;
+  opacity:var(--grain-opacity);mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
 
-/* ---------- top bar ---------- */
+.wrap{max-width:1120px;margin:0 auto;padding-inline:24px}
+.entry,.opener,.feature,.toc,.why{scroll-margin-top:66px}
+
+/* ---------- bar ---------- */
 .bar{
-  position:sticky;top:env(safe-area-inset-top, 0px);z-index:30;
-  background:color-mix(in srgb, var(--paper) 90%, transparent);
+  position:sticky;top:env(safe-area-inset-top, 0px);z-index:40;
+  background:color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--rule-soft);
+  border-bottom:1px solid var(--rule);
 }
 .bar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:52px}
 .bar a{text-decoration:none;color:inherit}
-.bar .me{font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:-.02em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .me{font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:-.025em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar nav{display:flex;gap:20px;flex:0 0 auto;font-family:var(--sans);font-weight:500;font-size:14px}
-.bar nav a{color:var(--muted);white-space:nowrap;transition:color .16s}
-.bar nav a:hover,.bar nav a.on{color:var(--accent)}
+.bar nav a{color:var(--muted);white-space:nowrap;transition:color .15s}
+.bar nav a:hover,.bar nav a.on{color:var(--orange)}
 .bar nav .sm{display:none}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(44px,8vw,92px) clamp(32px,4vw,52px)}
+.hero .slug{
+  font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;
+  color:var(--orange);margin:0 0 clamp(18px,3vw,26px);
+}
+.hero h1{
+  font-family:var(--sans);font-weight:700;
+  font-size:clamp(2.45rem,7.6vw,5.4rem);
+  line-height:.99;letter-spacing:-.042em;
+  margin:0 0 clamp(26px,4vw,40px);max-width:14ch;
+}
+/* riso overprint: the one place this page raises its voice */
+.hero h1 b{
+  font-weight:700;color:var(--blue);
+  text-shadow:3px 3px 0 var(--orange);
+}
+.lede{
+  font-size:clamp(1.14rem,2.3vw,1.42rem);line-height:1.5;
+  margin:0;max-width:33ch;color:var(--ink-2);
+}
+.lede strong{color:var(--ink);font-weight:600}
+@media (min-width:900px){ .lede{margin-left:40%} }
+.runline{
+  font-family:var(--mono);font-size:12.5px;line-height:2.05;color:var(--muted);
+  margin:clamp(30px,4vw,44px) 0 0;
+}
+.runline b{color:var(--ink);font-weight:500}
+.rise{animation:rise .6s cubic-bezier(.2,.75,.3,1) both}
+.rise.d1{animation-delay:.07s}
+@keyframes rise{from{opacity:.001;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+/* ---------- contents ---------- */
+.toc{padding-block:clamp(36px,5vw,58px);border-top:1px solid var(--rule)}
+.toc h2{
+  font-family:var(--sans);font-weight:600;font-size:13.5px;color:var(--muted);
+  margin:0 0 24px;
+}
+.toc h2 i{font-style:normal;color:var(--orange)}
+.toc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 56px}
+.toc-col h3{
+  font-family:var(--sans);font-weight:700;font-size:1rem;letter-spacing:-.02em;
+  margin:0 0 13px;padding-bottom:9px;border-bottom:2px solid var(--ink);
+}
+.toc-col ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.toc-col a{display:flex;align-items:baseline;gap:9px;text-decoration:none;color:inherit}
+.toc-col a .t{font-family:var(--sans);font-weight:600;font-size:.98rem;letter-spacing:-.015em;transition:color .15s}
+.toc-col a .d{font-style:italic;color:var(--muted);font-size:.93rem}
+.toc-col a:hover .t{color:var(--orange)}
+.pip{width:7px;height:7px;flex:0 0 auto;transform:translateY(-2px);background:var(--muted)}
+.pip.on{background:var(--orange)}
+
+/* ---------- part opener ---------- */
+.opener{padding-block:clamp(52px,7vw,88px) clamp(20px,3vw,30px)}
+.opener .num{font-family:var(--sans);font-weight:600;font-size:13.5px;color:var(--orange);margin:0 0 15px}
+.opener h2{
+  font-family:var(--sans);font-weight:700;
+  font-size:clamp(1.9rem,5.4vw,3.2rem);line-height:1.02;letter-spacing:-.036em;
+  margin:0 0 17px;max-width:16ch;
+}
+.opener p{margin:0;color:var(--ink-2);max-width:52ch;font-size:1.06rem}
+
+/* ---------- full entry ---------- */
+.entry{padding-block:clamp(38px,5vw,60px);border-top:1px solid var(--rule)}
+.entry h3{
+  font-family:var(--sans);font-weight:700;
+  font-size:clamp(1.8rem,4.4vw,2.7rem);line-height:1.04;letter-spacing:-.036em;
+  margin:0 0 9px;
+}
+.tagline{
+  font-size:clamp(1.08rem,2.2vw,1.28rem);font-style:italic;color:var(--ink-2);
+  margin:0 0 17px;max-width:42ch;
+}
+.tag{font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--ink-2);margin:0 0 6px}
+.tag b{color:var(--ink);font-weight:600}
+.stack{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--muted);margin:0 0 28px;max-width:58ch}
+
+.prose{max-width:62ch}
+.prose p{margin:0 0 20px}
+.prose p:last-child{margin-bottom:0}
+.prose strong{font-weight:600;color:var(--ink)}
+.lead-in{font-family:var(--sans);font-weight:600;font-size:.93em;letter-spacing:-.01em;color:var(--blue)}
+.lead-in.warn{color:var(--orange)}
+.big{
+  font-size:clamp(1.16rem,2.3vw,1.38rem);line-height:1.44;color:var(--ink);
+  margin-bottom:26px;max-width:37ch;
+}
+/* hanging standfirst: a deliberate break, only where there is margin to hang into */
+@media (min-width:1220px){
+  .entry > .prose > .big:first-child{margin-left:-36px;max-width:40ch}
+}
+
+.sidenote{
+  background:var(--paper-2);padding:14px 17px;margin:0 0 22px;max-width:62ch;
+  border-left:3px solid var(--orange);
+}
+.sidenote b{display:block;font-family:var(--sans);font-weight:600;font-size:12px;color:var(--muted);margin-bottom:6px}
+.sidenote p{margin:0;font-size:.87rem;line-height:1.55;color:var(--ink-2)}
+.sidenote p + p{margin-top:9px}
+.sidenote strong{color:var(--ink);font-weight:600}
+@media (min-width:1040px){
+  .entry{padding-right:300px}
+  .sidenote{float:right;clear:right;width:246px;margin:6px -282px 24px 0}
+}
+
+/* ---------- photographs ---------- */
+.shot{margin:30px 0 26px;max-width:460px}
+.shot img{border:1px solid var(--rule);background:var(--paper-2)}
+.shot figcaption{
+  font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--muted);
+  margin-top:10px;line-height:1.45;
+}
+.shot.tilt-a{transform:rotate(-1.1deg)}
+.shot.tilt-b{transform:rotate(.85deg)}
+.shot.wide{max-width:600px}
+.shot.empty img{display:none}
+.shot.empty .drop{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  min-height:190px;padding:24px;
+  border:1px dashed var(--rule);background:var(--paper-2);
+  font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--muted);
+}
+.shot .drop{display:none}
+@media (min-width:1040px){
+  .shot.pull{float:right;clear:right;width:246px;margin:6px -282px 26px 0;max-width:none}
+}
+
+/* ---------- brief entry: a different skeleton on purpose ---------- */
+.brief{
+  padding-block:clamp(30px,4vw,44px);border-top:1px solid var(--rule-soft);
+  display:grid;grid-template-columns:minmax(0,1fr);gap:14px;
+}
+.brief h3{
+  font-family:var(--sans);font-weight:700;font-size:1.32rem;letter-spacing:-.028em;
+  margin:0;line-height:1.14;
+}
+.brief .tagline{font-size:1rem;margin:5px 0 0;max-width:30ch}
+.brief .prose{max-width:58ch}
+.brief .prose p{margin-bottom:15px;font-size:.98rem}
+.brief .tag{margin-top:9px;font-size:12.5px}
+@media (min-width:860px){
+  .brief{grid-template-columns:262px minmax(0,1fr);gap:46px;align-items:start}
+}
+
+/* ---------- quote ---------- */
+.quote{padding-block:clamp(46px,6vw,76px);border-top:2px solid var(--ink)}
+.quote p{
+  font-family:var(--sans);font-weight:700;
+  font-size:clamp(1.45rem,4vw,2.45rem);line-height:1.11;letter-spacing:-.036em;
+  margin:0;max-width:19ch;
+}
+.quote p i{font-style:normal;color:var(--blue)}
+
+/* ---------- Liquid, the loud one ---------- */
+.feature{
+  --paper:var(--field);
+  --paper-2:rgba(255,255,255,.11);
+  --ink:#FBF8F0;
+  --ink-2:rgba(251,248,240,.87);
+  --muted:rgba(251,248,240,.62);
+  --rule:rgba(251,248,240,.26);
+  --rule-soft:rgba(251,248,240,.16);
+  --blue:#FFC9B8;
+  --orange:#FFAF93;
+  background:var(--field);color:var(--ink);
+  margin-block:clamp(40px,5vw,66px);padding-block:clamp(46px,6vw,74px);
+}
+.feature .entry{border-top:0;padding-block:0}
+.feature .shot img{border-color:var(--rule)}
+.feature .live{
+  font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink);
+  display:inline-flex;align-items:center;gap:9px;margin:0 0 15px;
+}
+.feature .live::before{
+  content:"";width:9px;height:9px;border-radius:50%;background:#9CF5C0;
+  box-shadow:0 0 0 4px rgba(156,245,192,.24);
+}
+/* content-sized, unequal: not a tile grid */
+.proof{
+  display:flex;flex-wrap:wrap;gap:2px 44px;margin:28px 0 0;padding:0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.proof div{padding:15px 0 14px}
+.proof dt{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted);margin:0 0 3px}
+.proof dd{margin:0;font-family:var(--sans);font-weight:700;font-size:1.22rem;letter-spacing:-.024em}
+.partners{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.partners li{
+  font-family:var(--sans);font-weight:500;font-size:13.5px;
+  border:1px solid var(--rule);padding:7px 14px;border-radius:999px;color:var(--ink-2);
+}
+
+/* ---------- why ---------- */
+.why{padding-block:clamp(48px,6vw,80px);border-top:2px solid var(--ink)}
+.why h2{
+  font-family:var(--sans);font-weight:700;font-size:clamp(1.8rem,4.6vw,2.7rem);
+  letter-spacing:-.036em;line-height:1.04;margin:0 0 22px;max-width:16ch;
+}
+.why .prose{max-width:60ch}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--rule);padding-block:40px 58px}
+footer .sig{font-family:var(--sans);font-weight:700;font-size:clamp(1.2rem,3vw,1.6rem);letter-spacing:-.034em;margin:0 0 9px}
+footer p{margin:0;color:var(--ink-2);max-width:50ch;font-size:1rem}
+footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+
+@media (max-width:860px){ .toc-grid{grid-template-columns:1fr;gap:28px} }
 @media (max-width:560px){
   .bar nav .lg{display:none}
   .bar nav .sm{display:inline}
   .bar nav{gap:16px}
+  .shot.tilt-a,.shot.tilt-b{transform:none}
 }
-
-/* ---------- hero ---------- */
-.hero{padding-block:clamp(48px,9vw,96px) clamp(36px,5vw,56px)}
-.hero .name{
-  font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.01em;
-  color:var(--muted);margin:0 0 clamp(20px,3vw,28px);
-}
-.hero h1{
-  font-family:var(--sans);font-weight:700;
-  font-size:clamp(2.5rem,7.4vw,5.1rem);
-  line-height:1.015;letter-spacing:-.037em;
-  margin:0 0 clamp(24px,3.5vw,34px);max-width:15ch;text-wrap:balance;
-}
-.hero h1 span{color:var(--accent)}
-.lede{
-  font-size:clamp(1.18rem,2.5vw,1.5rem);line-height:1.48;
-  margin:0;max-width:40ch;color:var(--ink-2);
-}
-.lede strong{color:var(--ink);font-weight:600}
-.facts{
-  font-family:var(--mono);font-size:12.5px;line-height:2.1;color:var(--muted);
-  margin:clamp(28px,4vw,40px) 0 0;max-width:72ch;
-}
-.facts b{color:var(--ink);font-weight:400}
-.rise{animation:rise .62s cubic-bezier(.2,.75,.3,1) both}
-.rise.d1{animation-delay:.06s}
-@keyframes rise{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){ .rise{animation:none} *{transition:none !important} }
-
-/* ---------- contents ---------- */
-.toc{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--rule)}
-.toc h2{
-  font-family:var(--sans);font-weight:600;font-size:14px;color:var(--muted);
-  margin:0 0 26px;letter-spacing:.005em;
-}
-.toc h2 em{font-style:normal;color:var(--ink-2)}
-.toc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 52px}
-@media (max-width:720px){ .toc-grid{grid-template-columns:1fr;gap:30px} }
-.toc-col h3{
-  font-family:var(--sans);font-weight:700;font-size:1.02rem;letter-spacing:-.015em;
-  margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--rule);
-}
-.toc-col ol{list-style:none;margin:0;padding:0;display:grid;gap:11px}
-.toc-col a{
-  display:flex;align-items:baseline;gap:9px;text-decoration:none;color:inherit;
-}
-.toc-col a .t{font-family:var(--sans);font-weight:600;font-size:1rem;letter-spacing:-.012em;transition:color .16s}
-.toc-col a .d{font-style:italic;color:var(--muted);font-size:.95rem}
-.toc-col a:hover .t{color:var(--accent)}
-.dot{
-  width:7px;height:7px;border-radius:50%;background:var(--muted);
-  flex:0 0 auto;transform:translateY(-2px);
-}
-.dot.on{background:var(--accent-bg)}
-
-/* ---------- part opener ---------- */
-.opener{padding-block:clamp(56px,8vw,92px) clamp(24px,3vw,32px)}
-.opener .num{
-  font-family:var(--sans);font-weight:600;font-size:14px;color:var(--accent);margin:0 0 16px;
-}
-.opener h2{
-  font-family:var(--sans);font-weight:700;
-  font-size:clamp(1.95rem,5.2vw,3.15rem);line-height:1.04;letter-spacing:-.032em;
-  margin:0 0 18px;max-width:17ch;text-wrap:balance;
-}
-.opener p{margin:0;color:var(--ink-2);max-width:54ch;font-size:1.08rem}
-
-/* ---------- entries ---------- */
-.entry{padding-block:clamp(40px,5.5vw,64px);border-top:1px solid var(--rule)}
-.entry h3{
-  font-family:var(--sans);font-weight:700;
-  font-size:clamp(1.75rem,4.2vw,2.6rem);line-height:1.06;letter-spacing:-.032em;
-  margin:0 0 10px;
-}
-.tagline{
-  font-size:clamp(1.1rem,2.3vw,1.3rem);font-style:italic;color:var(--ink-2);
-  margin:0 0 18px;max-width:44ch;
-}
-.tag{
-  font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--ink-2);
-  margin:0 0 7px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
-}
-.tag b{color:var(--ink);font-weight:600}
-.stack{
-  font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--muted);
-  margin:0 0 30px;max-width:60ch;
-}
-
-.prose{max-width:63ch}
-.prose p{margin:0 0 20px}
-.prose p:last-child{margin-bottom:0}
-.prose strong{font-weight:600;color:var(--ink)}
-.prose em{font-style:italic}
-.lead-in{
-  font-family:var(--sans);font-weight:600;font-size:.94em;letter-spacing:-.005em;
-  color:var(--accent);
-}
-.lead-in.warn{color:var(--warn)}
-.big{
-  font-size:clamp(1.18rem,2.4vw,1.42rem);line-height:1.45;color:var(--ink);
-  margin-bottom:26px;max-width:38ch;
-}
-
-.sidenote{
-  background:var(--surface);padding:15px 17px;margin:0 0 22px;max-width:63ch;
-  border-top:2px solid var(--accent);
-}
-.sidenote b{
-  display:block;font-family:var(--sans);font-weight:600;font-size:12.5px;
-  color:var(--muted);margin-bottom:6px;
-}
-.sidenote p{margin:0;font-size:.875rem;line-height:1.55;color:var(--ink-2)}
-.sidenote p + p{margin-top:9px}
-.sidenote strong{color:var(--ink);font-weight:600}
-
-/* true margin sidenotes on wide screens -- must follow the base rule above */
-@media (min-width:1040px){
-  .entry{padding-right:300px}
-  .sidenote{
-    float:right;clear:right;width:244px;
-    margin:6px -280px 24px 0;
-  }
-}
-
-/* ---------- quote ---------- */
-.quote{padding-block:clamp(48px,7vw,80px);border-top:1px solid var(--rule)}
-.quote p{
-  font-family:var(--sans);font-weight:600;
-  font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.14;letter-spacing:-.032em;
-  margin:0;max-width:20ch;text-wrap:balance;
-}
-.quote p span{color:var(--accent)}
-
-/* ---------- featured (Liquid) ---------- */
-.feature{
-  --paper:var(--accent-bg);
-  --surface:rgba(255,255,255,.10);
-  --ink:#FCFAF6;
-  --ink-2:rgba(252,250,246,.86);
-  --muted:rgba(252,250,246,.62);
-  --rule:rgba(252,250,246,.24);
-  --accent:#C3D0FF;
-  --warn:#FFC2A4;
-  background:var(--accent-bg);color:var(--ink);
-  margin-block:clamp(44px,6vw,72px);
-  padding-block:clamp(48px,7vw,80px);
-}
-.feature .entry{border-top:0;padding-block:0}
-.feature .sidenote{border-top-color:var(--accent)}
-.feature .live{
-  font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink);
-  display:inline-flex;align-items:center;gap:8px;margin:0 0 16px;
-}
-.feature .live::before{
-  content:"";width:8px;height:8px;border-radius:50%;background:#B9F5D0;
-  box-shadow:0 0 0 4px rgba(185,245,208,.22);
-}
-.partners{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0;padding:0;list-style:none}
-.partners li{
-  font-family:var(--sans);font-weight:500;font-size:13.5px;
-  border:1px solid var(--rule);padding:7px 13px;border-radius:999px;color:var(--ink-2);
-}
-
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--rule);margin-top:clamp(48px,7vw,80px);padding-block:44px 60px}
-footer .sig{
-  font-family:var(--sans);font-weight:700;font-size:clamp(1.25rem,3vw,1.7rem);
-  letter-spacing:-.03em;margin:0 0 10px;
-}
-footer p{margin:0;color:var(--ink-2);max-width:52ch;font-size:1rem}
-footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--muted)}
-
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -286,49 +332,49 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
 <main id="top">
 
   <section class="wrap hero">
-    <p class="name">Nikhil Thota &middot; Portfolio for Startup Shell</p>
-    <h1 class="rise">I build for the people and problems larger companies <span>overlook.</span></h1>
-    <p class="lede rise d1">Computer Science at Maryland. I've shipped four full-stack applications &mdash; <strong>one of them is processing real money for real restaurants on Route 1 right now</strong> &mdash; and there are three more behind it.</p>
-    <p class="facts">
-      <b>4</b> applications built end to end &nbsp;&middot;&nbsp;
-      <b>1</b> taking live payments &nbsp;&middot;&nbsp;
-      <b>3</b> partner restaurants &nbsp;&middot;&nbsp;
-      <b>500+</b> offices cold-called &nbsp;&middot;&nbsp;
-      <b>+50%</b> recruiting lift at my fire station &nbsp;&middot;&nbsp;
-      <b>140+</b> volunteer hours &nbsp;&middot;&nbsp;
+    <p class="slug">Nikhil Thota &middot; Portfolio for Startup Shell</p>
+    <h1 class="rise">I build for the people and problems larger companies <b>overlook.</b></h1>
+    <p class="lede rise d1">Computer Science at Maryland. I've shipped four full-stack applications. <strong>One of them is processing real money for real restaurants on Route 1 right now</strong>, and there are three more behind it.</p>
+    <p class="runline">
+      <b>4</b> applications built end to end &nbsp;/&nbsp;
+      <b>1</b> taking live payments &nbsp;/&nbsp;
+      <b>3</b> partner restaurants &nbsp;/&nbsp;
+      <b>500+</b> offices cold-called &nbsp;/&nbsp;
+      <b>+50%</b> recruiting lift at my fire station &nbsp;/&nbsp;
+      <b>140+</b> volunteer hours &nbsp;/&nbsp;
       ICS 100 &amp; 700 certified
     </p>
   </section>
 
   <section class="wrap toc">
-    <h2>Everything below is either something I shipped or something I'm shipping. <em>About a nine-minute read.</em></h2>
+    <h2>Everything here is either something I shipped or something I'm shipping. <i>About a nine-minute read.</i></h2>
     <div class="toc-grid">
       <div class="toc-col">
         <h3>What I've built</h3>
         <ol>
-          <li><a href="#smartmoney"><span class="dot on"></span><span><span class="t">SmartMoney</span> <span class="d">&mdash; AI financial advisor</span></span></a></li>
-          <li><a href="#returnflow"><span class="dot on"></span><span><span class="t">ReturnFlow</span> <span class="d">&mdash; e-commerce returns</span></span></a></li>
-          <li><a href="#ride-rite"><span class="dot"></span><span><span class="t">Ride Rite</span> <span class="d">&mdash; zero-commission taxi hailing</span></span></a></li>
-          <li><a href="#station-43"><span class="dot on"></span><span><span class="t">Station 43</span> <span class="d">&mdash; volunteer recruitment</span></span></a></li>
-          <li><a href="#klio"><span class="dot"></span><span><span class="t">Klio Care</span> <span class="d">&mdash; running sales, not code</span></span></a></li>
+          <li><a href="#smartmoney"><span class="pip on"></span><span><span class="t">SmartMoney</span> <span class="d">AI financial advisor</span></span></a></li>
+          <li><a href="#station-43"><span class="pip on"></span><span><span class="t">Station 43</span> <span class="d">volunteer recruitment</span></span></a></li>
+          <li><a href="#returnflow"><span class="pip on"></span><span><span class="t">ReturnFlow</span> <span class="d">e-commerce returns</span></span></a></li>
+          <li><a href="#klio"><span class="pip"></span><span><span class="t">Klio Care</span> <span class="d">running sales, not code</span></span></a></li>
         </ol>
       </div>
       <div class="toc-col">
         <h3>What I'm working on</h3>
         <ol>
-          <li><a href="#liquid"><span class="dot on"></span><span><span class="t">Liquid</span> <span class="d">&mdash; a wallet for College Park, live</span></span></a></li>
-          <li><a href="#reputation"><span class="dot"></span><span><span class="t">Feedback routing</span> <span class="d">&mdash; for independent restaurants</span></span></a></li>
-          <li><a href="#smartmoney-2"><span class="dot"></span><span><span class="t">SmartMoney, expanded</span> <span class="d">&mdash; onto real bank data</span></span></a></li>
+          <li><a href="#liquid"><span class="pip on"></span><span><span class="t">Liquid</span> <span class="d">a wallet for College Park, live</span></span></a></li>
+          <li><a href="#ride-rite"><span class="pip on"></span><span><span class="t">Ride Rite</span> <span class="d">zero-commission taxi hailing</span></span></a></li>
+          <li><a href="#reputation"><span class="pip"></span><span><span class="t">Feedback routing</span> <span class="d">for independent restaurants</span></span></a></li>
+          <li><a href="#smartmoney-2"><span class="pip"></span><span><span class="t">SmartMoney, expanded</span> <span class="d">onto real bank data</span></span></a></li>
         </ol>
       </div>
     </div>
   </section>
 
-  <!-- ============ PART ONE ============ -->
+  <!-- ===================== PART ONE ===================== -->
   <section class="wrap opener" id="built">
     <p class="num">Part one</p>
     <h2>What I've built, and what each one broke teaching me</h2>
-    <p>Two production web applications, a mobile app with a regulatory strategy attached, a website redesign for my fire station, and a stretch running sales at a healthcare startup.</p>
+    <p>Two production applications, a redesign for my fire station, and a stretch running sales at a healthcare startup.</p>
   </section>
 
   <div class="wrap">
@@ -337,10 +383,17 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
       <h3>SmartMoney</h3>
       <p class="tagline">An AI financial advisor that isn't allowed to do the math</p>
       <p class="tag"><b>Shipped</b> &middot; solo build, deployed with CI/CD</p>
-      <p class="stack">React &middot; Tailwind &middot; Java Spring Boot &middot; Groq API &middot; LLaMA &middot; Railway</p>
+      <p class="stack">React / Tailwind / Java Spring Boot / Groq API / LLaMA / Railway</p>
 
       <div class="prose">
-        <p class="big">You give it your income, expenses and goals. It gives you back a personalized budget and an optimal debt-payoff plan, computed from your actual numbers rather than pulled from a template.</p>
+        <p class="big">You give it your income, expenses and goals. It gives back a personalized budget and an optimal debt-payoff plan, computed from your actual numbers rather than pulled from a template.</p>
+
+        <!-- Drop a file at img/smartmoney.png and this slot becomes the screenshot. -->
+        <figure class="shot tilt-a">
+          <img src="img/smartmoney.png" alt="SmartMoney debt payoff timeline">
+          <div class="drop">img/smartmoney.png<br>the debt payoff timeline</div>
+          <figcaption>The payoff timeline, drawn from the same tested functions the chat calls.</figcaption>
+        </figure>
 
         <p>Financial advice is either generic to the point of being useless, or expensive enough that the people who need it most can't afford it. SmartMoney was my attempt at the third option.</p>
 
@@ -348,13 +401,13 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
 
         <aside class="sidenote">
           <b>Plain English</b>
-          <p><strong>Avalanche and snowball</strong> are the two standard ways to pay off several debts at once. Avalanche attacks the highest interest rate first and costs you least overall; snowball clears the smallest balance first and is easier to stick with.</p>
+          <p><strong>Avalanche and snowball</strong> are the two standard ways to pay off several debts at once. Avalanche attacks the highest interest rate first and costs least overall. Snowball clears the smallest balance first and is easier to stick with.</p>
           <p><strong>Tool-calling</strong> means the AI can't invent a number. When it needs one, it calls my function and reports what came back.</p>
         </aside>
 
-        <p>The important architectural decision was that <strong>the model does not do arithmetic.</strong> I wrote the financial library myself &mdash; avalanche and snowball amortization, a financial health score, goal-feasibility projections &mdash; and the model reaches those functions through a tool-calling interface. The advice in the chat and the numbers in the interface come from the same tested code, so they cannot disagree with each other.</p>
+        <p>The important architectural decision was that <strong>the model does not do arithmetic.</strong> I wrote the financial library myself (avalanche and snowball amortization, a financial health score, goal-feasibility projections) and the model reaches those functions through a tool-calling interface. The advice in the chat and the numbers in the interface come from the same tested code, so they cannot disagree with each other.</p>
 
-        <p><strong class="lead-in">What I learned.</strong> The hardest problem wasn't engineering, it was making the output feel human. Early versions were technically correct and tone-deaf &mdash; telling a student with $800 a month in income to "reduce discretionary spending," acknowledging nothing about their actual life. The quality of an AI output is almost entirely determined by the quality of what you hand it, and that changed how I approach AI products generally.</p>
+        <p><strong class="lead-in">What I learned.</strong> The hardest problem wasn't engineering, it was making the output feel human. Early versions were technically correct and tone-deaf, telling a student with $800 a month in income to "reduce discretionary spending," acknowledging nothing about their actual life. The quality of an AI output is almost entirely determined by the quality of what you hand it, and that changed how I approach AI products generally.</p>
 
         <p><strong class="lead-in warn">The failure I overcame.</strong> I built the frontend and backend in parallel instead of designing the API contract first, and paid for it in integration friction I had personally created. I also underestimated how much edge-case handling financial data demands, because people's finances don't fit neatly into forms.</p>
 
@@ -362,101 +415,65 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
       </div>
     </article>
 
-    <article class="entry" id="returnflow">
-      <h3>ReturnFlow</h3>
-      <p class="tagline">Automating the worst part of buying things online</p>
-      <p class="tag"><b>Shipped</b> &middot; full stack &mdash; mobile, API, schema</p>
-      <p class="stack">React Native &middot; Flask &middot; SQLite &middot; SQLAlchemy</p>
-
-      <div class="prose">
-        <p class="big">A mobile-first platform that runs an e-commerce return from the moment a customer starts it to the moment it's resolved &mdash; replacing a process most retailers still run on email threads and spreadsheets.</p>
-
-        <p>Returns are one of the most broken experiences in e-commerce. Customers face confusing policies, manual tracking, and no visibility into where their return actually is. I built the React Native frontend, designed the REST API in Flask, and architected the relational database with SQLite and SQLAlchemy.</p>
-
-        <aside class="sidenote">
-          <b>Plain English</b>
-          <p>A <strong>schema</strong> is the blueprint of a database: which tables exist, what each stores, how they connect. Getting it wrong late is expensive, because everything built on top has to move too.</p>
-        </aside>
-
-        <p><strong class="lead-in warn">The failure I overcame.</strong> I designed the initial schema around the simple case, and real-world data never is the simple case. Partial returns, split orders and status reversals all broke the model, and I had to refactor the schema completely mid-project. It cost me a week.</p>
-
-        <p>It also permanently changed how I work. I now treat the schema as the most important design decision in any project, and the one I am least willing to rush.</p>
-      </div>
-    </article>
-
-    <article class="entry" id="ride-rite">
-      <h3>Ride Rite</h3>
-      <p class="tagline">Zero-commission ride-hailing for New York's yellow taxis</p>
-      <p class="tag"><b>Built &amp; researched</b> &middot; app, pricing model, regulatory strategy, patent brief</p>
-      <p class="stack">Expo &middot; React Native &middot; Supabase &middot; Stripe</p>
-
-      <div class="prose">
-        <p class="big">Instead of taking 25&ndash;30% of every fare the way Uber and Lyft do, drivers pay a flat monthly subscription and keep the entire fare.</p>
-
-        <p>It's aimed at NYC medallion taxi drivers, who watched their passenger volume move to apps they were largely locked out of. The idea came from reading about Namma Yatri, an Indian ride-hailing platform built on exactly that model. The question was whether it could work in a city that regulates taxis heavily &mdash; so most of my work went into the regulation, not the app.</p>
-
-        <aside class="sidenote">
-          <b>Plain English</b>
-          <p>An <strong>E-Hail Provider License</strong> lets an app dispatch taxis that already exist. An <strong>FHV Base License</strong> means operating your own fleet. Different regulators, different obligations &mdash; picking the wrong one changes the entire company.</p>
-          <p><strong>Alice Corp. v. CLS Bank</strong> is a 2014 Supreme Court decision that made abstract software and business-method ideas unpatentable unless claimed as a concrete technical implementation.</p>
-        </aside>
-
-        <p>I spent months on the ground the idea would have to stand on: the difference between the Taxi and Limousine Commission's E-Hail Provider License and an FHV Base License, the Flex Fare program that lets a licensed app quote an upfront price instead of running the meter, and the wheelchair-accessible vehicle requirements attached to licensing.</p>
-
-        <p>I decided to pursue the E-Hail license first and to distribute through the NYC Taxi Workers Alliance rather than recruiting drivers one at a time. I deliberately chose <em>not</em> to implement surge pricing, because the entire pitch is predictability. I designed a two-part pricing model combining a fair-pay floor with a discount pegged relative to a predicted Uber fare, and wrote a full end-to-end product description for a patent attorney &mdash; specifying the algorithm concretely rather than describing the idea abstractly, which is the distinction <em>Alice</em> turns on.</p>
-
-        <p>Then I built the app itself from scratch in Expo and React Native with Supabase and Stripe, having never written a mobile app before.</p>
-
-        <p><strong class="lead-in">What I learned.</strong> I assumed the app was the hard part. It isn't. A competitor, Empower, built a working zero-commission product and ran it in New York without the license &mdash; and that regulatory exposure is why it is not a real competitor today. <strong>The permission to dispatch is the product.</strong></p>
-
-        <aside class="sidenote">
-          <b>Plain English</b>
-          <p><strong>Row-level security</strong> denies access to every row in a database by default, until you write rules for who may read or write each one. Turning it on without writing those rules locks out everyone &mdash; quietly.</p>
-        </aside>
-
-        <p><strong class="lead-in warn">The smaller failure.</strong> I turned on Supabase row-level security and wrote no policies, so reads and writes failed silently and nothing ever raised an error. It ran, and it didn't work, and those are not the same thing.</p>
-      </div>
-    </article>
-
     <article class="entry" id="station-43">
       <h3>Station 43</h3>
       <p class="tagline">A recruitment site rewritten from the recruit's point of view</p>
       <p class="tag"><b>Shipped</b> &middot; +50% applications, 20+ new volunteers</p>
-      <p class="stack">HTML &middot; CSS &middot; Adobe Suite &middot; UX writing</p>
+      <p class="stack">HTML / CSS / Adobe Suite / UX writing</p>
 
       <div class="prose">
         <p class="big">Our volunteer recruitment website was written for us, not for the person considering applying. I rebuilt it around them, and applications rose 50%.</p>
 
+        <!-- Drop a file at img/station43.png to fill this. -->
+        <figure class="shot pull tilt-b">
+          <img src="img/station43.png" alt="The redesigned Station 43 recruitment page">
+          <div class="drop">img/station43.png<br>the rebuilt page</div>
+          <figcaption>The rebuilt recruitment page.</figcaption>
+        </figure>
+
         <p>It assumed familiarity, buried the information that mattered, and put friction in front of someone applying for the first time. I redesigned it end to end: restructured the layout, rewrote the messaging from the prospective volunteer's perspective, and stripped every unnecessary step out of the application itself. We brought in more than 20 new volunteers.</p>
+
+        <p>I'm a volunteer firefighter there, so I had the unusual advantage of being both the person who built the site and the person who has to work alongside whoever it recruits.</p>
 
         <p><strong class="lead-in">What I learned.</strong> This taught me more about product thinking than anything I've built since. Most sites fail not because the design is bad, but because they're written from the organization's point of view instead of the user's. The shift from "what do we want to say" to "what does this person need to feel, and do next" is something I now apply to everything I build.</p>
       </div>
     </article>
 
-    <article class="entry" id="klio">
-      <h3>Klio Care</h3>
-      <p class="tagline">Learning to be told no, on someone else's payroll</p>
-      <p class="tag"><b>Not code</b> &middot; ran the sales function, without a formal title</p>
-      <p class="stack">Lead lists &middot; pitch materials &middot; outreach scripts &middot; field work in NJ, San Antonio, El Paso</p>
-
+    <article class="brief" id="returnflow">
+      <div>
+        <h3>ReturnFlow</h3>
+        <p class="tagline">Automating the worst part of buying things online</p>
+        <p class="tag"><b>Shipped</b> &middot; React Native, Flask, SQLAlchemy</p>
+      </div>
       <div class="prose">
-        <p class="big">At a healthcare startup building home-health referral and order-signing workflows, I built the provider lead lists, wrote the pitch and the outreach scripts, and did the field outreach myself.</p>
+        <p>A mobile-first platform that runs an e-commerce return from the moment a customer starts it to the moment it's resolved, replacing a process most retailers still handle over email. I built the React Native frontend, designed the REST API in Flask, and architected the database.</p>
+        <p><strong class="lead-in warn">The failure I overcame.</strong> I designed the schema around the simple case, and real-world data never is the simple case. Partial returns, split orders and status reversals all broke the model, and I refactored the schema completely mid-project. It cost me a week, and it permanently changed how I work: I now treat the schema as the most important design decision in any project, and the one I am least willing to rush.</p>
+      </div>
+    </article>
 
-        <p>I contacted more than 500 doctors' offices and onboarded roughly 40. The conversion rate is the lesson. Most of the job is hearing no, adjusting the script, and going again &mdash; and I would much rather have learned that on someone else's payroll than on my own company's.</p>
+    <article class="brief" id="klio">
+      <div>
+        <h3>Klio Care</h3>
+        <p class="tagline">Learning to be told no, on someone else's payroll</p>
+        <p class="tag"><b>Not code</b> &middot; ran the sales function</p>
+      </div>
+      <div class="prose">
+        <p>At a healthcare startup building home-health referral and order-signing workflows, I ran sales without a formal title: provider lead lists, pitch materials, outreach scripts, and field work across New Jersey, San Antonio and El Paso.</p>
+        <p>I contacted more than 500 doctors' offices and onboarded roughly 40. The conversion rate is the lesson. Most of the job is hearing no, adjusting the script, and going again, and I would much rather have learned that on someone else's payroll than on my own company's.</p>
       </div>
     </article>
 
     <div class="quote">
-      <p>Built with real intention, technology doesn't just automate a process. It reshapes how people connect with <span>institutions, and with each other.</span></p>
+      <p>Built with real intention, technology doesn't just automate a process. It reshapes how people connect with <i>institutions, and with each other.</i></p>
     </div>
 
   </div>
 
-  <!-- ============ PART TWO ============ -->
+  <!-- ===================== PART TWO ===================== -->
   <section class="wrap opener" id="working">
     <p class="num">Part two</p>
     <h2>&ldquo;What are you working on?&rdquo;</h2>
-    <p>One company that is live and taking real payments, and two ideas I'm actively developing behind it.</p>
+    <p>One company taking real payments today, one I'm pushing through a licensing process, and two ideas behind them.</p>
   </section>
 
   <section class="feature">
@@ -466,22 +483,37 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
         <h3>Liquid</h3>
         <p class="tagline">A mobile wallet for College Park</p>
         <p class="tag"><b>Co-founded with Pranav Puranik</b> &middot; incorporated in Maryland, approved by Stripe</p>
-        <p class="stack">React Native &middot; Stripe Connect &middot; Maryland LLC</p>
+        <p class="stack">React Native / Stripe Connect / Maryland LLC</p>
 
         <div class="prose">
-          <p class="big">Students load money into a campus wallet and get a discount at partner restaurants they could never get paying with a card &mdash; because we can offer merchants economics the card networks can't.</p>
+          <p class="big">Students load money into a campus wallet and get a discount at partner restaurants they could never get paying with a card, because we can offer merchants economics the card networks can't.</p>
+
+          <!-- Drop files at img/liquid-app.png and img/liquid-partner.jpg to fill these. -->
+          <figure class="shot pull tilt-a">
+            <img src="img/liquid-app.png" alt="The Liquid wallet mid-payment">
+            <div class="drop">img/liquid-app.png<br>the wallet, mid-payment</div>
+            <figcaption>The wallet at the moment of payment.</figcaption>
+          </figure>
 
           <p>Restaurants near campus lose two to three percent of every transaction to interchange, and have almost no direct channel to students. Liquid gives them a cheaper rail and access to exactly the customers they want.</p>
 
           <aside class="sidenote">
             <b>Plain English</b>
-            <p><strong>Interchange</strong> is the fee card networks take out of every card payment, typically 2&ndash;3%, charged to the merchant. For a deli on thin margins, that's real money.</p>
+            <p><strong>Interchange</strong> is the fee card networks take out of every card payment, typically 2 to 3%, charged to the merchant. For a deli on thin margins, that's real money.</p>
             <p><strong>T+2 settlement</strong> means funds from a payment land in the merchant's bank two business days later, not instantly.</p>
           </aside>
 
-          <p><strong>The deposit mechanic is what makes the discount real rather than promotional.</strong> A restaurant's biggest objection to discounting is uncertainty &mdash; they're cutting margin on the hope that volume follows. When a student has already loaded money into the ecosystem, the restaurant isn't discounting on hope. It's discounting against spend that has already been committed. That's why partners sign.</p>
+          <p><strong>The deposit mechanic is what makes the discount real rather than promotional.</strong> A restaurant's biggest objection to discounting is uncertainty: they're cutting margin on the hope that volume follows. When a student has already loaded money into the ecosystem, the restaurant isn't discounting on hope. It's discounting against spend that has already been committed. That's why partners sign.</p>
 
-          <p>We've incorporated in Maryland, been approved by Stripe, built the app in React Native, and launched live payment processing.</p>
+          <dl class="proof">
+            <div><dt>Partners live</dt><dd>3</dd></div>
+            <div><dt>Entity</dt><dd>Maryland LLC</dd></div>
+            <div><dt>Processor</dt><dd>Stripe, approved</dd></div>
+            <!-- HIGHEST-IMPACT ADDITION. Once you have the figure, paste this in above:
+            <div><dt>Transactions to date</dt><dd>312</dd></div>
+            <div><dt>Volume processed</dt><dd>$4,100</dd></div>
+            -->
+          </dl>
 
           <ul class="partners">
             <li>Marathon Deli</li>
@@ -489,13 +521,13 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
             <li>Craving Hour Halal</li>
           </ul>
 
-          <p style="margin-top:28px"><strong class="lead-in">The hard part is not the app.</strong> Holding other people's money is a regulated activity. I had to work out whether our stored-value balances make us a money transmitter under Maryland law &mdash; which would require licensing we cannot realistically obtain as students &mdash; and I took that question directly to the Maryland Office of Financial Regulation rather than guessing. The answer shaped the product: how balances are held, how funds settle, and what we are legally permitted to call the thing.</p>
+          <p style="margin-top:30px"><strong class="lead-in">The hard part is not the app.</strong> Holding other people's money is a regulated activity. I had to work out whether our stored-value balances make us a money transmitter under Maryland law, which would require licensing we cannot realistically obtain as students, and I took that question directly to the Maryland Office of Financial Regulation rather than guessing. The answer shaped the product: how balances are held, how funds settle, and what we are legally permitted to call the thing.</p>
 
           <p>The payment flow runs on Stripe Connect using separate charges and transfers, which means understanding a T+2 settlement window and what it does to a restaurant's cash flow <em>before</em> promising anything in a sales meeting. I also had to navigate Apple's App Store rules on payments, where the exemption we rely on is narrow enough that getting it wrong means getting pulled.</p>
 
           <p><strong class="lead-in warn">The failure worth naming.</strong> Early on I counted verbal commitments from owners as signed partners, and built a launch timeline on top of them. An enthusiastic yes in a conversation is worth close to nothing until there is a signed merchant agreement and a configured terminal. We rebuilt the pipeline so that signatures and live transactions are the only milestones that count.</p>
 
-          <p><strong class="lead-in">What's next.</strong> Student-to-student transfers and delivery &mdash; so the wallet becomes the default way money moves on campus, rather than a discount card.</p>
+          <p><strong class="lead-in">What's next.</strong> Student-to-student transfers and delivery, so the wallet becomes the default way money moves on campus rather than a discount card.</p>
         </div>
       </article>
     </div>
@@ -503,44 +535,80 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
 
   <div class="wrap">
 
-    <article class="entry" id="reputation" style="border-top:0">
-      <h3>Feedback routing</h3>
-      <p class="tagline">Catching the complaint before it becomes a one-star review</p>
-      <p class="tag"><b>Concept</b> &middot; B2B SaaS for independent restaurants</p>
+    <article class="entry" id="ride-rite" style="border-top:0">
+      <h3>Ride Rite</h3>
+      <p class="tagline">Zero-commission ride-hailing for New York's yellow taxis</p>
+      <p class="tag"><b>In progress</b> &middot; app built, pursuing the E-Hail license</p>
+      <p class="stack">Expo / React Native / Supabase / Stripe</p>
 
       <div class="prose">
-        <p class="big">Text every customer after their meal. Send the happy ones to Google, and route the unhappy ones to the manager who can actually fix it &mdash; before their frustration goes public.</p>
+        <p class="big">Instead of taking 25 to 30% of every fare the way Uber and Lyft do, drivers pay a flat monthly subscription and keep the entire fare.</p>
 
-        <p>The reviews that end up on Google Maps almost never represent the average customer experience. Unhappy customers are motivated to write; happy ones forget. Independent restaurants end up held hostage by a feedback mechanism they don't control.</p>
+        <!-- Drop a file at img/ride-rite.png to fill this. -->
+        <figure class="shot pull tilt-b">
+          <img src="img/ride-rite.png" alt="The Ride Rite app">
+          <div class="drop">img/ride-rite.png<br>the app, built in Expo</div>
+          <figcaption>Built in Expo and React Native, my first mobile app.</figcaption>
+        </figure>
 
-        <p>So: a customer finishes their meal and leaves. A few minutes later they get a text asking them to rate the experience from one to ten. <strong>Seven or above</strong>, they're thanked and sent a Google review link, capturing positive sentiment while it's still fresh. <strong>Below seven</strong>, they're asked what went wrong and given the server's name, the manager's contact, and corporate where relevant.</p>
-
-        <p>The Google link still goes out either way, as Google's policy requires &mdash; but a customer who has already been heard is far less likely to publish a damaging public review. Their frustration has somewhere to go that isn't the internet.</p>
-
-        <p>51 percent of negative reviews cite poor service specifically. This routes that feedback to the person who can act on it, and raises the public rating at the same time.</p>
-      </div>
-    </article>
-
-    <article class="entry" id="smartmoney-2">
-      <h3>SmartMoney, expanded</h3>
-      <p class="tagline">From self-reported numbers to real transactions</p>
-      <p class="tag"><b>Next build</b> &middot; consumer fintech</p>
-
-      <div class="prose">
-        <p class="big">The prototype is a solid foundation, but it runs on numbers people type in &mdash; and almost nobody knows what they actually spend in a month.</p>
+        <p>It's aimed at NYC medallion taxi drivers, who watched their passenger volume move to apps they were largely locked out of. The idea came from reading about Namma Yatri, an Indian ride-hailing platform built on exactly that model. The question was whether it could work in a city that regulates taxis heavily, so most of my work has gone into the regulation rather than the app.</p>
 
         <aside class="sidenote">
           <b>Plain English</b>
-          <p><strong>Plaid</strong> is the service that securely connects an app to a user's bank account so it can read transactions &mdash; the plumbing behind most consumer finance apps.</p>
+          <p>An <strong>E-Hail Provider License</strong> lets an app dispatch taxis that already exist. An <strong>FHV Base License</strong> means operating your own fleet. Different regulators, different obligations, and picking the wrong one changes the entire company.</p>
+          <p><strong>Alice Corp. v. CLS Bank</strong> is a 2014 Supreme Court decision that made abstract software and business-method ideas unpatentable unless claimed as a concrete technical implementation.</p>
         </aside>
 
-        <p>Connecting through Plaid grounds the advice in actual transactions. An advisor that can see real spending, identify patterns and give specific guidance is useful in a way a form-based tool never is.</p>
+        <p>I spent months on the ground the idea has to stand on: the difference between the Taxi and Limousine Commission's E-Hail Provider License and an FHV Base License, the Flex Fare program that lets a licensed app quote an upfront price instead of running the meter, and the wheelchair-accessible vehicle requirements attached to licensing.</p>
 
-        <p>The long-term version is a financial co-pilot for young people. Not a robo-advisor for people who already have investments, but a tool for someone trying to get out of debt, build an emergency fund, or make rent on a first apartment. That market is enormous and almost entirely unserved for anyone who can't afford a financial advisor.</p>
+        <p>I'm pursuing the E-Hail license first, and I plan to distribute through the NYC Taxi Workers Alliance rather than recruiting drivers one at a time. I deliberately chose <em>not</em> to implement surge pricing, because the entire pitch is predictability. I designed a two-part pricing model combining a fair-pay floor with a discount pegged relative to a predicted Uber fare, and wrote a full end-to-end product description for a patent attorney, specifying the algorithm concretely rather than describing the idea abstractly, which is the distinction <em>Alice</em> turns on.</p>
 
-        <p>Next step is the Plaid integration, and a more conversational interface that removes the friction of setup.</p>
+        <p>Then I built the app itself from scratch in Expo and React Native with Supabase and Stripe, having never written a mobile app before.</p>
+
+        <p><strong class="lead-in">What I learned.</strong> I assumed the app was the hard part. It isn't. A competitor, Empower, built a working zero-commission product and ran it in New York without the license, and that regulatory exposure is why it is not a real competitor today. <strong>The permission to dispatch is the product.</strong></p>
+
+        <aside class="sidenote">
+          <b>Plain English</b>
+          <p><strong>Row-level security</strong> denies access to every row in a database by default, until you write rules for who may read or write each one. Turning it on without writing those rules locks out everyone, quietly.</p>
+        </aside>
+
+        <p><strong class="lead-in warn">The smaller failure.</strong> I turned on Supabase row-level security and wrote no policies, so reads and writes failed silently and nothing ever raised an error. It ran, and it didn't work, and those are not the same thing.</p>
       </div>
     </article>
+
+    <article class="brief" id="reputation">
+      <div>
+        <h3>Feedback routing</h3>
+        <p class="tagline">Catching the complaint before it becomes a one-star review</p>
+        <p class="tag"><b>Concept</b> &middot; B2B SaaS for restaurants</p>
+      </div>
+      <div class="prose">
+        <p>The reviews that end up on Google Maps almost never represent the average customer. Unhappy customers are motivated to write; happy ones forget. Independent restaurants end up held hostage by a feedback mechanism they don't control.</p>
+        <p>So: a customer finishes their meal and leaves. A few minutes later they get a text asking them to rate it from one to ten. <strong>Seven or above</strong>, they're thanked and sent a Google review link, capturing positive sentiment while it's fresh. <strong>Below seven</strong>, they're asked what went wrong and given the server's name, the manager's contact, and corporate where relevant.</p>
+        <p>The Google link still goes out either way, as Google's policy requires, but a customer who has already been heard is far less likely to publish a damaging public review. Their frustration has somewhere to go that isn't the internet. 51% of negative reviews cite poor service specifically, so this routes that feedback to the person who can act on it and raises the public rating at the same time.</p>
+      </div>
+    </article>
+
+    <article class="brief" id="smartmoney-2">
+      <div>
+        <h3>SmartMoney, expanded</h3>
+        <p class="tagline">From self-reported numbers to real transactions</p>
+        <p class="tag"><b>Next build</b> &middot; consumer fintech</p>
+      </div>
+      <div class="prose">
+        <p>The prototype is a solid foundation, but it runs on numbers people type in, and almost nobody knows what they actually spend in a month. Connecting through Plaid grounds the advice in real transactions. An advisor that can see actual spending, identify patterns and give specific guidance is useful in a way a form-based tool never is.</p>
+        <p>The long-term version is a financial co-pilot for young people. Not a robo-advisor for people who already have investments, but a tool for someone trying to get out of debt, build an emergency fund, or make rent on a first apartment. That market is enormous and almost entirely unserved for anyone who can't afford an advisor. Next step is the Plaid integration and a more conversational setup.</p>
+      </div>
+    </article>
+
+    <section class="why" id="why">
+      <h2>Why Startup Shell</h2>
+      <div class="prose">
+        <p>I've built most of this alone. SmartMoney, Ride Rite and the Station 43 site were solo from start to finish. Liquid is the first time I've had a co-founder, and the difference in how fast we move is the clearest argument I have for not working alone again.</p>
+        <p>What I want from Startup Shell is the part I can't build by myself: people who have already taken a product through the kind of regulatory questions I'm sitting in front of right now, somewhere to work that isn't my dorm room, and the specific kind of feedback you only get from other people who are shipping. The kind that tells you the deposit mechanic doesn't make sense before a restaurant owner does.</p>
+        <p>I'd also like to be useful in return. I can help anyone stuck on payments, Stripe Connect, or the question of whether what they're building makes them a money transmitter, because I've had to answer all three for Liquid.</p>
+      </div>
+    </section>
 
   </div>
 
@@ -556,10 +624,19 @@ footer .fine{margin-top:20px;font-family:var(--sans);font-size:13px;color:var(--
 
 <script>
 (function(){
+  // Photo slots: show the drop target when the image isn't there yet.
+  var shots = document.querySelectorAll('.shot');
+  Array.prototype.forEach.call(shots, function(fig){
+    var img = fig.querySelector('img');
+    if (!img) return;
+    function miss(){ fig.classList.add('empty'); }
+    if (img.complete && img.naturalWidth === 0) miss();
+    img.addEventListener('error', miss);
+  });
+
   var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a[data-spy]'));
   var targets = links.map(function(a){ return document.getElementById(a.getAttribute('data-spy')); });
   var queued = false;
-
   function frame(){
     var d = document.documentElement;
     var mark = d.scrollTop + d.clientHeight * 0.3;
