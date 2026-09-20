@@ -145,7 +145,7 @@ body::after{
 .tag b{color:var(--ink);font-weight:600}
 .stack{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--muted);margin:0 0 28px;max-width:58ch}
 
-.prose{max-width:62ch}
+.prose{max-width:62ch;display:flow-root}   /* contain the floated sidenotes */
 .prose p{margin:0 0 20px}
 .prose p:last-child{margin-bottom:0}
 .prose strong{font-weight:600;color:var(--ink)}
@@ -319,7 +319,7 @@ footer .lk{font-size:14.5px}
   <section class="wrap hero">
     <p class="slug">Nikhil Thota &middot; Portfolio for Startup Shell</p>
     <h1 class="rise">I build for the people and problems larger companies <b>overlook.</b></h1>
-    <p class="lede rise d1">Computer Science at Maryland. I've shipped four full-stack applications. <strong>One of them is processing real money for real restaurants on Route 1 right now</strong>, and there are three more behind it.</p>
+    <p class="lede rise d1">Computer Science at Maryland. I've shipped four full-stack applications. <strong>One of them is taking payments from restaurants on Route 1 right now</strong>, and three more behind it that aren't.</p>
     <p class="runline">
       <b>4</b> applications built end to end &nbsp;/&nbsp;
       <b>1</b> taking live payments &nbsp;/&nbsp;
@@ -337,7 +337,7 @@ footer .lk{font-size:14.5px}
   </section>
 
   <section class="wrap toc">
-    <h2>Everything here is either something I shipped or something I'm shipping. <i>About a nine-minute read.</i></h2>
+    <h2>Everything here is either something I shipped or something I'm shipping. <i>Each section opens with the short version, set large.</i></h2>
     <div class="toc-grid">
       <div class="toc-col">
         <h3>What I've built</h3>
@@ -354,7 +354,7 @@ footer .lk{font-size:14.5px}
           <li><a href="#liquid"><span class="pip on"></span><span><span class="t">Liquid</span> <span class="d">a wallet for College Park, live</span></span></a></li>
           <li><a href="#ride-rite"><span class="pip on"></span><span><span class="t">Ride Rite</span> <span class="d">zero-commission taxi hailing</span></span></a></li>
           <li><a href="#reputation"><span class="pip"></span><span><span class="t">Feedback routing</span> <span class="d">for independent restaurants</span></span></a></li>
-          <li><a href="#smartmoney-2"><span class="pip"></span><span><span class="t">SmartMoney, expanded</span> <span class="d">onto real bank data</span></span></a></li>
+          <li><a href="#smartmoney-2"><span class="pip"></span><span><span class="t">SmartMoney, expanded</span> <span class="d">onto live bank data</span></span></a></li>
         </ol>
       </div>
     </div>
@@ -391,15 +391,13 @@ footer .lk{font-size:14.5px}
 
         <p>Financial advice is either generic to the point of being useless, or expensive enough that the people who need it most can't afford it. SmartMoney was my attempt at the third option.</p>
 
-        <p>I integrated Groq's LLaMA model over REST, built a React and Tailwind frontend with interactive debt calculators and payment-timeline visualizations, and deployed a Spring Boot backend to Railway behind a full CI/CD pipeline.</p>
-
         <aside class="sidenote">
           <b>Plain English</b>
           <p><strong>Avalanche and snowball</strong> are the two standard ways to pay off several debts at once. Avalanche attacks the highest interest rate first and costs least overall. Snowball clears the smallest balance first and is easier to stick with.</p>
           <p><strong>Tool-calling</strong> means the AI can't invent a number. When it needs one, it calls my function and reports what came back.</p>
         </aside>
 
-        <p>The important architectural decision was that <strong>the model does not do arithmetic.</strong> I wrote the financial library myself (avalanche and snowball amortization, a financial health score, goal-feasibility projections) and the model reaches those functions through a tool-calling interface. The advice in the chat and the numbers in the interface come from the same tested code, so they cannot disagree with each other.</p>
+        <p>The important architectural decision was that <strong>the model does not do arithmetic.</strong> I wrote the financial library myself, covering avalanche and snowball amortization, a health score and goal-feasibility projections, and the model reaches those functions through a tool-calling interface. The advice in the chat and the numbers in the interface come from the same tested code, so they cannot disagree with each other.</p>
 
         <p><strong class="lead-in">What I learned.</strong> The hardest problem wasn't engineering, it was making the output feel human. Early versions were technically correct and tone-deaf, telling a student with $800 a month in income to "reduce discretionary spending," acknowledging nothing about their actual life. The quality of an AI output is almost entirely determined by the quality of what you hand it, and that changed how I approach AI products generally.</p>
 
@@ -429,7 +427,7 @@ footer .lk{font-size:14.5px}
 
         <p>I'm a volunteer firefighter there, so I had the unusual advantage of being both the person who built the site and the person who has to work alongside whoever it recruits.</p>
 
-        <p><strong class="lead-in">What I learned.</strong> This taught me more about product thinking than anything I've built since. Most sites fail not because the design is bad, but because they're written from the organization's point of view instead of the user's. The shift from "what do we want to say" to "what does this person need to feel, and do next" is something I now apply to everything I build.</p>
+        <p>This taught me more about product thinking than anything I've built since. Most sites fail not because the design is bad, but because they are written from the organization's point of view instead of the reader's. Ours was, and I had read it a hundred times without noticing.</p>
       </div>
     </article>
 
@@ -458,7 +456,7 @@ footer .lk{font-size:14.5px}
     </article>
 
     <div class="quote">
-      <p>Built with real intention, technology doesn't just automate a process. It reshapes how people connect with <i>institutions, and with each other.</i></p>
+      <p>Built with intention, technology doesn't just automate a process. It reshapes how people connect with <i>institutions, and with each other.</i></p>
     </div>
 
   </div>
@@ -467,7 +465,7 @@ footer .lk{font-size:14.5px}
   <section class="wrap opener" id="working">
     <p class="num">Part two</p>
     <h2>&ldquo;What are you working on?&rdquo;</h2>
-    <p>One company taking real payments today, one I'm pushing through a licensing process, and two ideas behind them.</p>
+    <p>One company taking payments today, one I'm pushing through a licensing process, and two ideas behind them.</p>
   </section>
 
   <section class="feature">
@@ -525,7 +523,7 @@ footer .lk{font-size:14.5px}
 
           <p><strong class="lead-in warn">The failure worth naming.</strong> Early on I counted verbal commitments from owners as signed partners, and built a launch timeline on top of them. An enthusiastic yes in a conversation is worth close to nothing until there is a signed merchant agreement and a configured terminal. We rebuilt the pipeline so that signatures and live transactions are the only milestones that count.</p>
 
-          <p><strong class="lead-in">What's next.</strong> Student-to-student transfers and delivery, so the wallet becomes the default way money moves on campus rather than a discount card.</p>
+          <p>Next is student-to-student transfers and delivery, so the wallet becomes the default way money moves on campus rather than a discount card.</p>
         </div>
       </article>
     </div>
@@ -552,21 +550,16 @@ footer .lk{font-size:14.5px}
           <figcaption>Built in Expo and React Native, my first mobile app.</figcaption>
         </figure>
 
-        <p>It's aimed at NYC medallion taxi drivers, who watched their passenger volume move to apps they were largely locked out of. The idea came from reading about Namma Yatri, an Indian ride-hailing platform built on exactly that model. The question was whether it could work in a city that regulates taxis heavily, so most of my work has gone into the regulation rather than the app.</p>
+        <p>It's aimed at NYC medallion taxi drivers, who watched their passenger volume move to apps they were largely locked out of. The idea came from Namma Yatri, an Indian platform built on exactly that model. The question was whether it could work in a city that regulates taxis heavily, so most of my work has gone into the regulation rather than the app.</p>
 
         <aside class="sidenote">
           <b>Plain English</b>
           <p>An <strong>E-Hail Provider License</strong> lets an app dispatch taxis that already exist. An <strong>FHV Base License</strong> means operating your own fleet. Different regulators, different obligations, and picking the wrong one changes the entire company.</p>
-          <p><strong>Alice Corp. v. CLS Bank</strong> is a 2014 Supreme Court decision that made abstract software and business-method ideas unpatentable unless claimed as a concrete technical implementation.</p>
         </aside>
 
-        <p>I spent months on the ground the idea has to stand on: the difference between the Taxi and Limousine Commission's E-Hail Provider License and an FHV Base License, the Flex Fare program that lets a licensed app quote an upfront price instead of running the meter, and the wheelchair-accessible vehicle requirements attached to licensing.</p>
+        <p>I'm pursuing the Taxi and Limousine Commission's E-Hail licence first, and I plan to distribute through the NYC Taxi Workers Alliance rather than recruiting drivers one at a time. I chose <em>not</em> to implement surge pricing, because the entire pitch is predictability, and designed a two-part fare that sets a floor under driver pay and prices the rider below a predicted Uber fare. Then I built the app in Expo and React Native with Supabase and Stripe, having never written a mobile app before.</p>
 
-        <p>I'm pursuing the E-Hail license first, and I plan to distribute through the NYC Taxi Workers Alliance rather than recruiting drivers one at a time. I deliberately chose <em>not</em> to implement surge pricing, because the entire pitch is predictability. I designed a two-part pricing model combining a fair-pay floor with a discount pegged relative to a predicted Uber fare, and wrote a full end-to-end product description for a patent attorney, specifying the algorithm concretely rather than describing the idea abstractly, which is the distinction <em>Alice</em> turns on.</p>
-
-        <p>Then I built the app itself from scratch in Expo and React Native with Supabase and Stripe, having never written a mobile app before.</p>
-
-        <p><strong class="lead-in">What I learned.</strong> I assumed the app was the hard part. It isn't. A competitor, Empower, built a working zero-commission product and ran it in New York without the license, and that regulatory exposure is why it is not a real competitor today. <strong>The permission to dispatch is the product.</strong></p>
+        <p><strong class="lead-in">What I learned.</strong> I assumed the app was the hard part. It isn't. A competitor, Empower, built a working zero-commission product and ran it in New York without the license, and that exposure is why it is not a competitor today. <strong>The permission to dispatch is the product.</strong></p>
 
         <aside class="sidenote">
           <b>Plain English</b>
@@ -584,21 +577,21 @@ footer .lk{font-size:14.5px}
         <p class="tag"><b>Concept</b> &middot; B2B SaaS for restaurants</p>
       </div>
       <div class="prose">
-        <p>The reviews that end up on Google Maps almost never represent the average customer. Unhappy customers are motivated to write; happy ones forget. Independent restaurants end up held hostage by a feedback mechanism they don't control.</p>
-        <p>So: a customer finishes their meal and leaves. A few minutes later they get a text asking them to rate it from one to ten. <strong>Seven or above</strong>, they're thanked and sent a Google review link, capturing positive sentiment while it's fresh. <strong>Below seven</strong>, they're asked what went wrong and given the server's name, the manager's contact, and corporate where relevant.</p>
-        <p>The Google link still goes out either way, as Google's policy requires, but a customer who has already been heard is far less likely to publish a damaging public review. Their frustration has somewhere to go that isn't the internet. 51% of negative reviews cite poor service specifically, so this routes that feedback to the person who can act on it and raises the public rating at the same time.</p>
+        <p>Reviews on Google Maps almost never represent the average customer. Unhappy people are motivated to write and happy ones forget, so independent restaurants are held hostage by a mechanism they don't control.</p>
+        <p>A customer finishes their meal and leaves. A few minutes later they get a text asking them to rate it one to ten. <strong>Seven or above</strong>, they're thanked and sent a Google review link while the meal is still fresh. <strong>Below seven</strong>, they're asked what went wrong and given the manager's contact. The Google link goes out either way, as Google's policy requires, but someone who has already been heard is less likely to publish a damaging one. 51% of negative reviews cite service, which is the part a manager can fix.</p>
+        <p>What I don't know is whether a manager who gets that text at nine on a Friday night does anything with it. If they don't, this is a politer way to bury a complaint rather than a way to answer one, and I can't think of a way to find out short of building it.</p>
       </div>
     </article>
 
     <article class="brief" id="smartmoney-2">
       <div>
         <h3>SmartMoney, expanded</h3>
-        <p class="tagline">From self-reported numbers to real transactions</p>
+        <p class="tagline">From typed-in numbers to bank data</p>
         <p class="tag"><b>Next build</b> &middot; consumer fintech</p>
       </div>
       <div class="prose">
-        <p>The prototype is a solid foundation, but it runs on numbers people type in, and almost nobody knows what they actually spend in a month. Connecting through Plaid grounds the advice in real transactions. An advisor that can see actual spending, identify patterns and give specific guidance is useful in a way a form-based tool never is.</p>
-        <p>The long-term version is a financial co-pilot for young people. Not a robo-advisor for people who already have investments, but a tool for someone trying to get out of debt, build an emergency fund, or make rent on a first apartment. That market is enormous and almost entirely unserved for anyone who can't afford an advisor. Next step is the Plaid integration and a more conversational setup.</p>
+        <p>The prototype runs on numbers people type in, and almost nobody knows what they spend in a month. Connecting through Plaid grounds it in what someone spent rather than what they remember spending, which is the difference between a calculator and an advisor.</p>
+        <p>The long-term version is a co-pilot for people with no investments to manage: someone getting out of debt, building an emergency fund, or making rent on a first apartment. That market is enormous and almost entirely unserved for anyone who can't afford an advisor. Next step is the Plaid integration.</p>
       </div>
     </article>
 

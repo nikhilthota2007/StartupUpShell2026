@@ -54,8 +54,9 @@ uncomment once you have the real figures. No invented numbers ship in this file.
 
 Built for a reviewer with ten minutes and no expertise in any of these domains:
 
-- Each entry opens with a large-type standfirst, so the page skims in roughly two
-  minutes and reads in about nine.
+- Each entry opens with a large-type standfirst, so the page can be skimmed in a
+  couple of minutes. No reading-time estimate is printed: announcing a number
+  invites a reviewer to check it.
 - Jargon (interchange, T+2 settlement, row-level security, money transmitter,
   avalanche/snowball, *Alice Corp.*, Plaid) is translated in margin sidenotes
   beside the paragraph that uses it.
