@@ -12,13 +12,15 @@ A single-page portfolio answering the Startup Shell application prompt.
 
 Built for a reviewer with ten minutes and no expertise in any of these domains:
 
-- Every entry opens with a bolded **"In one line"** summary, so the page can be
-  skimmed in about two minutes and read in about nine.
+- Each entry opens with a large-type standfirst, so the page skims in about two
+  minutes and reads in about nine.
 - Jargon (interchange, T+2 settlement, row-level security, money transmitter,
-  avalanche/snowball, *Alice Corp.*, Plaid) is translated in grey **Plain English**
-  boxes next to where it's used.
-- Status markers reflect real state — `LIVE`, `SHIPPED`, `CONCEPT` — rather than
-  decorative numbering.
+  avalanche/snowball, *Alice Corp.*, Plaid) is translated in margin sidenotes
+  beside the paragraph that uses it.
+- Typography is a heavy grotesque (Archivo) over a warm serif body (Newsreader),
+  with monospace reserved for tech stacks, where it carries meaning.
+- Liquid gets a full-bleed ultramarine section because it is the only thing here
+  taking live payments; everything else stays on quiet warm paper.
 
 ## Running it
 
