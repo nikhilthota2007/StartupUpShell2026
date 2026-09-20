@@ -176,12 +176,12 @@ body::after{
   .entry .diagram,
   .entry .shot.wide,
   .entry .pair{max-width:none;margin-right:-286px;clear:right}
-  .entry .pair .shot{flex:0 1 250px;max-width:250px}
+  .entry .pair .shot{flex:1 1 170px;max-width:232px}
 }
 
 /* ---------- screenshot pair ---------- */
-.pair{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin:30px 0 26px}
-.pair .shot{margin:0;flex:0 1 216px;max-width:216px}
+.pair{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin:30px 0 26px}
+.pair .shot{margin:0;flex:1 1 170px;max-width:232px}
 .pair .shot img{width:100%}
 @media (max-width:520px){ .pair{gap:12px} .pair .shot{flex:1 1 140px} }
 
@@ -211,8 +211,6 @@ body::after{
   font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--muted);
   margin-top:10px;line-height:1.45;
 }
-.shot.tilt-a{transform:rotate(-1.1deg)}
-.shot.tilt-b{transform:rotate(.85deg)}
 .shot.wide{max-width:600px}
 .shot.empty img{display:none}
 .shot.empty .drop{
@@ -239,9 +237,8 @@ body::after{
 .brief .prose{max-width:58ch}
 .brief .prose p{margin-bottom:15px;font-size:.98rem}
 .brief .tag{margin-top:9px;font-size:12.5px}
-@media (min-width:860px){
-  .brief{grid-template-columns:262px minmax(0,1fr);gap:46px;align-items:start}
-}
+.brief .prose{max-width:66ch}
+.brief > div:first-child{max-width:52ch}
 
 /* ---------- quote ---------- */
 .quote{padding-block:clamp(46px,6vw,76px);border-top:2px solid var(--ink)}
@@ -285,7 +282,6 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
   .bar nav .lg{display:none}
   .bar nav .sm{display:inline}
   .bar nav{gap:16px}
-  .shot.tilt-a,.shot.tilt-b{transform:none}
 }
 @media (prefers-reduced-motion:reduce){ .rise{animation:none} *{transition:none !important} }
 /* ---------- links ---------- */
@@ -387,15 +383,25 @@ footer .lk{font-size:14.5px}
         <p class="big">Students load money into a campus wallet and get a discount at partner restaurants they could never get paying with a card, because we can offer merchants economics the card networks can't.</p>
 
         <div class="pair">
-          <figure class="shot tilt-a">
-            <img src="img/liquid-merchant.webp" alt="A Liquid partner page showing the menu and the next off-peak discount">
-            <div class="drop">img/liquid-merchant.webp</div>
-            <figcaption>A partner&rsquo;s page: the menu, the next off-peak discount counting down, and the button that pays for it.</figcaption>
+          <figure class="shot">
+            <img src="img/liquid-wallet.webp" alt="The Liquid wallet home screen">
+            <div class="drop">img/liquid-wallet.webp</div>
+            <figcaption>The wallet: balance, the day&rsquo;s deal, partners nearby.</figcaption>
           </figure>
-          <figure class="shot tilt-b">
+          <figure class="shot">
+            <img src="img/liquid-merchant.webp" alt="A Liquid partner page with the off-peak discount">
+            <div class="drop">img/liquid-merchant.webp</div>
+            <figcaption>A partner&rsquo;s page, discount counting down, pay button below.</figcaption>
+          </figure>
+          <figure class="shot">
             <img src="img/liquid-partners.webp" alt="Liquid partner locations with addresses">
             <div class="drop">img/liquid-partners.webp</div>
-            <figcaption>The three live partners, and how far they are from campus.</figcaption>
+            <figcaption>The three live partners and their distance from campus.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/liquid-map.webp" alt="Map of Liquid partner locations around College Park">
+            <div class="drop">img/liquid-map.webp</div>
+            <figcaption>The same three, around campus.</figcaption>
           </figure>
         </div>
 
@@ -454,12 +460,6 @@ footer .lk{font-size:14.5px}
           <li>Craving Hour Halal</li>
         </ul>
 
-        <figure class="shot pull tilt-a">
-            <img src="img/liquid-map.webp" alt="Map of Liquid partner locations around College Park">
-            <div class="drop">img/liquid-map.webp</div>
-            <figcaption>Partners around campus, along Baltimore Avenue.</figcaption>
-          </figure>
-
         <ul class="links" style="margin-top:24px">
           <li><a class="lk" data-link="liquid">Open Liquid</a></li>
         </ul>
@@ -481,7 +481,13 @@ footer .lk{font-size:14.5px}
       <div class="prose">
         <p class="big">You give it your income, expenses and goals. It gives back a personalized budget and an optimal debt-payoff plan, computed from your actual numbers rather than pulled from a template.</p>
 
-        <figure class="shot wide tilt-a">
+        <figure class="shot wide">
+            <img src="img/smartmoney-onboarding.webp" alt="The SmartMoney setup page">
+            <div class="drop">img/smartmoney-onboarding.webp</div>
+            <figcaption>Setup asks in plain words: what comes in, what goes out, what you owe.</figcaption>
+          </figure>
+
+        <figure class="shot wide">
             <img src="img/smartmoney-calculator.png" alt="The SmartMoney debt payoff calculator comparing avalanche, snowball and a recommended plan">
             <div class="drop">img/smartmoney-calculator.png</div>
             <figcaption>Three strategies costed against the same debts: avalanche, snowball, and what the extra payment buys you.</figcaption>
@@ -516,19 +522,13 @@ footer .lk{font-size:14.5px}
           <figcaption>The model never computes a figure. It calls the library and reports what comes back, which is why the chat and the interface can't contradict each other.</figcaption>
         </figure>
 
-        <figure class="shot wide tilt-b">
+        <figure class="shot wide">
             <img src="img/smartmoney-chat.webp" alt="SmartMoney chat explaining the avalanche strategy using the user’s own interest rates">
             <div class="drop">img/smartmoney-chat.webp</div>
             <figcaption>The same figures, phrased. It cites the 22.9% card because the library told it that is the expensive one.</figcaption>
           </figure>
 
         <p>Financial advice is either generic to the point of being useless, or expensive enough that the people who need it most can't afford it. SmartMoney was my attempt at the third option.</p>
-
-        <figure class="shot pull tilt-b">
-            <img src="img/smartmoney-onboarding.webp" alt="The SmartMoney onboarding flow asking what comes in each month">
-            <div class="drop">img/smartmoney-onboarding.webp</div>
-            <figcaption>Setup asks in plain words: what comes in, what goes out, what you owe.</figcaption>
-          </figure>
 
         <aside class="sidenote">
           <b>Plain English</b>
@@ -557,13 +557,13 @@ footer .lk{font-size:14.5px}
       <div class="prose">
         <p class="big">Our volunteer recruitment website was written for us, not for the person considering applying. I rebuilt it around them, and applications rose 50%.</p>
 
-        <figure class="shot wide tilt-a">
+        <figure class="shot wide">
           <img src="img/station43-home.webp" alt="The West Windsor Volunteer Fire Company No. 1 home page">
           <div class="drop">img/station43-home.webp</div>
           <figcaption>The rebuilt home page. A hundred years of the company, and one obvious way in.</figcaption>
         </figure>
 
-        <figure class="shot pull tilt-b">
+        <figure class="shot pull">
           <img src="img/station43-signup.png" alt="The volunteer sign-up form">
           <div class="drop">img/station43-signup.png</div>
           <figcaption>The application itself: name, contact, address, and little else in the way.</figcaption>
@@ -583,7 +583,6 @@ footer .lk{font-size:14.5px}
       <div>
         <h3>ReturnFlow</h3>
         <p class="tagline">Automating the worst part of buying things online</p>
-        <div class="meta">
         <p class="tag"><b>Shipped</b> &middot; React Native, Flask, SQLAlchemy</p>
       </div>
       <div class="prose">
@@ -648,7 +647,8 @@ footer .lk{font-size:14.5px}
     <article class="entry" id="ride-rite">
       <h3>Ride Rite</h3>
       <p class="tagline">Zero-commission ride-hailing for New York's yellow taxis</p>
-      <p class="tag"><b>In progress</b> &middot; app built, pursuing the E-Hail license</p>
+      <div class="meta">
+        <p class="tag"><b>In progress</b> &middot; app built, pursuing the E-Hail license</p>
         <p class="stack">Expo / React Native / Supabase / Stripe</p>
       </div>
       <ul class="links">
