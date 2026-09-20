@@ -10,25 +10,34 @@ A single-page portfolio answering the Startup Shell application prompt.
 
 ## Images
 
-Screenshots live in `img/` and are referenced by exact filename:
+Screenshots live in `img/`:
 
 | File | Where |
 |---|---|
-| `station43-home.webp` | Station 43, the rebuilt home page |
-| `station43-signup.png` | Station 43, the sign-up form |
-| `liquid-wallet.webp` | Liquid, the wallet screen |
+| `liquid-merchant.webp` | Liquid, a partner page with the off-peak discount |
 | `liquid-partners.webp` | Liquid, the partner list |
 | `liquid-map.webp` | Liquid, partners on the map |
+| `smartmoney-calculator.png` | SmartMoney, the debt payoff calculator |
+| `smartmoney-chat.webp` | SmartMoney, the advisor citing the user's own rates |
+| `smartmoney-onboarding.webp` | SmartMoney, setup |
+| `station43-home.webp` | Station 43, the rebuilt home page |
+| `station43-signup.png` | Station 43, the sign-up form |
 
-Two tall phone screenshots sit side by side in a `.pair` container. Anything
-missing falls back to a labelled placeholder rather than a broken image.
+A wallet screenshot was deliberately removed: it displayed a "Lifetime Saved"
+figure produced by the author's own testing, which a reader would reasonably
+take for real usage. Ride Rite still has no screenshot.
 
-Four sections also carry hand-authored inline SVG diagrams, which show the
-mechanism rather than the product: SmartMoney's tool-calling architecture,
-card versus Liquid payment, the Ride Rite dispatch licence, and the feedback
-rating branch. No library, no image files, colours inherited from the page.
+Four sections also carry hand-authored inline SVG diagrams showing mechanism
+rather than product: SmartMoney's tool-calling architecture, card versus Liquid
+payment, the Ride Rite dispatch licence, and the feedback rating branch.
 
-Ride Rite has no screenshot yet. SmartMoney has a diagram but no screenshot.
+## Layout
+
+At 1040px and up the page is two columns: prose on the left at a 62ch measure,
+and a right rail holding each entry's spec block, its plain-English sidenotes
+and its smaller figures. Diagrams, wide screenshots and screenshot pairs span
+both columns. The container is 980px so the two columns fill it exactly, with
+no dead strip on the right.
 
 ## Adding your links
 

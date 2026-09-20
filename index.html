@@ -49,7 +49,7 @@ body::after{
   background-size:180px 180px;
 }
 
-.wrap{max-width:1120px;margin:0 auto;padding-inline:24px}
+.wrap{max-width:980px;margin:0 auto;padding-inline:24px}
 .entry,.opener,.toc,.why{scroll-margin-top:66px}
 
 /* ---------- bar ---------- */
@@ -163,9 +163,20 @@ body::after{
 .sidenote p{margin:0;font-size:.87rem;line-height:1.55;color:var(--ink-2)}
 .sidenote p + p{margin-top:9px}
 .sidenote strong{color:var(--ink);font-weight:600}
+.meta{margin:0 0 24px}
+.meta .tag{margin:0 0 5px}
+.meta .stack{margin:0;max-width:none}
 @media (min-width:1040px){
   .entry{padding-right:300px}
   .sidenote{float:right;clear:right;width:246px;margin:6px -282px 24px 0}
+  /* the spec block sits in the rail, so the rail is never empty */
+  .meta{float:right;clear:right;width:246px;margin:9px -286px 24px 0;padding-top:4px;border-top:2px solid var(--ink)}
+  .meta .stack{font-size:11.5px;line-height:1.8}
+  /* full-width bands: clear:right so they never slide under a floated note */
+  .entry .diagram,
+  .entry .shot.wide,
+  .entry .pair{max-width:none;margin-right:-286px;clear:right}
+  .entry .pair .shot{flex:0 1 250px;max-width:250px}
 }
 
 /* ---------- screenshot pair ---------- */
@@ -336,6 +347,7 @@ footer .lk{font-size:14.5px}
       <div class="toc-col">
         <h3>What I've built</h3>
         <ol>
+          <li><a href="#liquid"><span class="pip on"></span><span><span class="t">Liquid</span> <span class="d">a campus wallet, taking payments</span></span></a></li>
           <li><a href="#smartmoney"><span class="pip on"></span><span><span class="t">SmartMoney</span> <span class="d">AI financial advisor</span></span></a></li>
           <li><a href="#station-43"><span class="pip on"></span><span><span class="t">Station 43</span> <span class="d">volunteer recruitment</span></span></a></li>
           <li><a href="#returnflow"><span class="pip on"></span><span><span class="t">ReturnFlow</span> <span class="d">e-commerce returns</span></span></a></li>
@@ -345,7 +357,7 @@ footer .lk{font-size:14.5px}
       <div class="toc-col">
         <h3>What I'm working on</h3>
         <ol>
-          <li><a href="#liquid"><span class="pip on"></span><span><span class="t">Liquid</span> <span class="d">a wallet for College Park, live</span></span></a></li>
+          <li><a href="#liquid-business"><span class="pip on"></span><span><span class="t">Liquid, the business</span> <span class="d">licensing and distribution</span></span></a></li>
           <li><a href="#ride-rite"><span class="pip on"></span><span><span class="t">Ride Rite</span> <span class="d">zero-commission taxi hailing</span></span></a></li>
           <li><a href="#reputation"><span class="pip"></span><span><span class="t">Feedback routing</span> <span class="d">for independent restaurants</span></span></a></li>
           <li><a href="#smartmoney-2"><span class="pip"></span><span><span class="t">SmartMoney, expanded</span> <span class="d">onto live bank data</span></span></a></li>
@@ -358,164 +370,45 @@ footer .lk{font-size:14.5px}
   <section class="wrap opener" id="built">
     <p class="num">Part one</p>
     <h2>What I've built, and what each one broke teaching me</h2>
-    <p>Two production applications, a redesign for my fire station, and a stretch running sales at a healthcare startup.</p>
-  </section>
-
-  <div class="wrap">
-
-    <article class="entry" id="smartmoney">
-      <h3>SmartMoney</h3>
-      <p class="tagline">An AI financial advisor that isn't allowed to do the math</p>
-      <p class="tag"><b>Shipped</b> &middot; solo build, deployed with CI/CD</p>
-      <p class="stack">React / Tailwind / Java Spring Boot / Groq API / LLaMA / Railway</p>
-      <ul class="links">
-        <li><a class="lk" data-link="smartmoney">Live demo</a></li>
-        <li><a class="lk" data-link="smartmoneyRepo">Source</a></li>
-      </ul>
-
-      <div class="prose">
-        <p class="big">You give it your income, expenses and goals. It gives back a personalized budget and an optimal debt-payoff plan, computed from your actual numbers rather than pulled from a template.</p>
-
-        <figure class="diagram">
-          <svg class="dgm" viewBox="0 0 640 290" role="img" aria-label="The model calls a tested financial library for every number. The chat answer and the on-screen figures both read from that one library, so they cannot disagree.">
-            <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" stroke="none"/></marker></defs>
-            <rect x="24" y="30" width="196" height="62"/>
-            <text x="122" y="56" text-anchor="middle" class="t">LLaMA model</text>
-            <text x="122" y="74" text-anchor="middle" class="sub">writes the words</text>
-            <g class="key">
-              <rect x="420" y="30" width="196" height="62"/>
-              <text x="518" y="56" text-anchor="middle" class="t">Financial library</text>
-              <text x="518" y="74" text-anchor="middle" class="sub">the only arithmetic</text>
-            </g>
-            <line x1="224" y1="49" x2="412" y2="49" marker-end="url(#a1)"/>
-            <text x="318" y="41" text-anchor="middle" class="lbl">calls with your numbers</text>
-            <line x1="416" y1="74" x2="228" y2="74" marker-end="url(#a1)"/>
-            <text x="318" y="90" text-anchor="middle" class="lbl">returns computed figures</text>
-            <line x1="122" y1="92" x2="122" y2="178" marker-end="url(#a1)"/>
-            <text x="132" y="138" class="lbl">phrases them</text>
-            <line x1="518" y1="92" x2="518" y2="178" marker-end="url(#a1)"/>
-            <text x="528" y="138" class="lbl">renders them</text>
-            <rect x="24" y="182" width="196" height="54"/>
-            <text x="122" y="214" text-anchor="middle" class="t">Chat answer</text>
-            <rect x="420" y="182" width="196" height="54"/>
-            <text x="518" y="214" text-anchor="middle" class="t">On-screen numbers</text>
-            <polyline points="122,236 122,262 518,262 518,236"/>
-            <text x="320" y="282" text-anchor="middle" class="lbl">one source, so they cannot disagree</text>
-          </svg>
-          <figcaption>The model never computes a figure. It calls the library and reports what comes back, which is why the chat and the interface can't contradict each other.</figcaption>
-        </figure>
-
-        <p>Financial advice is either generic to the point of being useless, or expensive enough that the people who need it most can't afford it. SmartMoney was my attempt at the third option.</p>
-
-        <aside class="sidenote">
-          <b>Plain English</b>
-          <p><strong>Avalanche and snowball</strong> are the two standard ways to pay off several debts at once. Avalanche attacks the highest interest rate first and costs least overall. Snowball clears the smallest balance first and is easier to stick with.</p>
-          <p><strong>Tool-calling</strong> means the AI can't invent a number. When it needs one, it calls my function and reports what came back.</p>
-        </aside>
-
-        <p>The important architectural decision was that <strong>the model does not do arithmetic.</strong> I wrote the financial library myself, covering avalanche and snowball amortization, a health score and goal-feasibility projections, and the model reaches those functions through a tool-calling interface. The advice in the chat and the numbers in the interface come from the same tested code, so they cannot disagree with each other.</p>
-
-        <p><strong class="lead-in">What I learned.</strong> The hardest problem wasn't engineering, it was making the output feel human. Early versions were technically correct and tone-deaf, telling a student with $800 a month in income to "reduce discretionary spending," acknowledging nothing about their actual life. The quality of an AI output is almost entirely determined by the quality of what you hand it, and that changed how I approach AI products generally.</p>
-
-        <p><strong class="lead-in warn">The failure I overcame.</strong> I built the frontend and backend in parallel instead of designing the API contract first, and paid for it in integration friction I had personally created. I also underestimated how much edge-case handling financial data demands, because people's finances don't fit neatly into forms.</p>
-
-        <p>The sharpest failure came later. In live testing, the advisor produced a savings projection that was simply invented. Tracing it took longer than building the feature, and the cause turned out to be three unrelated bugs stacked on top of each other: an incomplete prompt constraint, a tool schema that instructed the model to omit a required parameter, and internal tool names leaking into user-facing text. I verified each fix against the live API rather than against mocks, since mocks would have cheerfully confirmed the broken behavior. That's why the safety constraints are now enforced by tests that fail the build if a guardrail is removed, instead of by a prompt I hope holds.</p>
-      </div>
-    </article>
-
-    <article class="entry" id="station-43">
-      <h3>Station 43</h3>
-      <p class="tagline">A recruitment site rewritten from the recruit's point of view</p>
-      <p class="tag"><b>Shipped</b> &middot; +50% applications, 20+ new volunteers</p>
-      <p class="stack">HTML / CSS / Adobe Suite / UX writing</p>
-
-      <div class="prose">
-        <p class="big">Our volunteer recruitment website was written for us, not for the person considering applying. I rebuilt it around them, and applications rose 50%.</p>
-
-        <figure class="shot wide tilt-a">
-          <img src="img/station43-home.webp" alt="The West Windsor Volunteer Fire Company No. 1 home page">
-          <div class="drop">img/station43-home.webp</div>
-          <figcaption>The rebuilt home page. A hundred years of the company, and one obvious way in.</figcaption>
-        </figure>
-
-        <figure class="shot pull tilt-b">
-          <img src="img/station43-signup.png" alt="The volunteer sign-up form">
-          <div class="drop">img/station43-signup.png</div>
-          <figcaption>The application itself: name, contact, address, and little else in the way.</figcaption>
-        </figure>
-
-        
-
-        <p>It assumed familiarity, buried the information that mattered, and put friction in front of someone applying for the first time. I redesigned it end to end: restructured the layout, rewrote the messaging from the prospective volunteer's perspective, and stripped every unnecessary step out of the application itself. We brought in more than 20 new volunteers.</p>
-
-        <p>I'm a volunteer firefighter there, so I had the unusual advantage of being both the person who built the site and the person who has to work alongside whoever it recruits.</p>
-
-        <p>This taught me more about product thinking than anything I've built since. Most sites fail not because the design is bad, but because they are written from the organization's point of view instead of the reader's. Ours was, and I had read it a hundred times without noticing.</p>
-      </div>
-    </article>
-
-    <article class="brief" id="returnflow">
-      <div>
-        <h3>ReturnFlow</h3>
-        <p class="tagline">Automating the worst part of buying things online</p>
-        <p class="tag"><b>Shipped</b> &middot; React Native, Flask, SQLAlchemy</p>
-      </div>
-      <div class="prose">
-        <p>A mobile-first platform that runs an e-commerce return from the moment a customer starts it to the moment it's resolved, replacing a process most retailers still handle over email. I built the React Native frontend, designed the REST API in Flask, and architected the database.</p>
-        <p><strong class="lead-in warn">The failure I overcame.</strong> I designed the schema around the simple case, and real-world data never is the simple case. Partial returns, split orders and status reversals all broke the model, and I refactored the schema completely mid-project. It cost me a week, and it permanently changed how I work: I now treat the schema as the most important design decision in any project, and the one I am least willing to rush.</p>
-      </div>
-    </article>
-
-    <article class="brief" id="klio">
-      <div>
-        <h3>Klio Care</h3>
-        <p class="tagline">Learning to be told no, on someone else's payroll</p>
-        <p class="tag"><b>Not code</b> &middot; ran the sales function</p>
-      </div>
-      <div class="prose">
-        <p>At a healthcare startup building home-health referral and order-signing workflows, I ran sales without a formal title: provider lead lists, pitch materials, outreach scripts, and field work across New Jersey, San Antonio and El Paso.</p>
-        <p>I contacted more than 500 doctors' offices and onboarded roughly 40. The conversion rate is the lesson. Most of the job is hearing no, adjusting the script, and going again, and I would much rather have learned that on someone else's payroll than on my own company's.</p>
-      </div>
-    </article>
-
-    <div class="quote">
-      <p>Built with intention, technology doesn't just automate a process. It reshapes how people connect with <i>institutions, and with each other.</i></p>
-    </div>
-
-  </div>
-
-  <!-- ===================== PART TWO ===================== -->
-  <section class="wrap opener" id="working">
-    <p class="num">Part two</p>
-    <h2>&ldquo;What are you working on?&rdquo;</h2>
-    <p>One company taking payments today, one I'm pushing through a licensing process, and two ideas behind them.</p>
+    <p>A campus wallet taking payments today, an AI financial advisor, a redesign for my fire station, and a stretch running sales at a healthcare startup.</p>
   </section>
 
   <div class="wrap">
 
     <article class="entry" id="liquid">
       <h3>Liquid</h3>
-        <p class="tagline">A mobile wallet for College Park</p>
-        <p class="tag"><b>Co-founded with Pranav Puranik</b> &middot; incorporated in Maryland, approved by Stripe</p>
+      <p class="tagline">A mobile wallet for College Park</p>
+      <div class="meta">
+        <p class="tag"><b>Co-founded with Pranav Puranik</b> &middot; live, taking payments</p>
         <p class="stack">React Native / Stripe Connect / Maryland LLC</p>
+      </div>
 
-        <div class="prose">
-          <p class="big">Students load money into a campus wallet and get a discount at partner restaurants they could never get paying with a card, because we can offer merchants economics the card networks can't.</p>
+      <div class="prose">
+        <p class="big">Students load money into a campus wallet and get a discount at partner restaurants they could never get paying with a card, because we can offer merchants economics the card networks can't.</p>
 
         <div class="pair">
           <figure class="shot tilt-a">
-          <img src="img/liquid-wallet.webp" alt="The Liquid wallet home screen">
-          <div class="drop">img/liquid-wallet.webp</div>
-          <figcaption>Balance, the day&rsquo;s off-peak discount, and the Pay button.</figcaption>
-        </figure>
+            <img src="img/liquid-merchant.webp" alt="A Liquid partner page showing the menu and the next off-peak discount">
+            <div class="drop">img/liquid-merchant.webp</div>
+            <figcaption>A partner&rsquo;s page: the menu, the next off-peak discount counting down, and the button that pays for it.</figcaption>
+          </figure>
           <figure class="shot tilt-b">
-          <img src="img/liquid-partners.webp" alt="Liquid partner locations with addresses">
-          <div class="drop">img/liquid-partners.webp</div>
-          <figcaption>The three live partners, and how far they are from campus.</figcaption>
-        </figure>
+            <img src="img/liquid-partners.webp" alt="Liquid partner locations with addresses">
+            <div class="drop">img/liquid-partners.webp</div>
+            <figcaption>The three live partners, and how far they are from campus.</figcaption>
+          </figure>
         </div>
 
-          <figure class="diagram">
+        <p>Restaurants near campus lose two to three percent of every transaction to interchange, and have almost no direct channel to students. Liquid gives them a cheaper rail and access to exactly the customers they want.</p>
+
+        <aside class="sidenote">
+          <b>Plain English</b>
+          <p><strong>Interchange</strong> is the fee card networks take out of every card payment, typically 2 to 3%, charged to the merchant. For a deli on thin margins, that's real money.</p>
+        </aside>
+
+        <p><strong>The deposit mechanic is what makes the discount real rather than promotional.</strong> A restaurant's biggest objection to discounting is uncertainty: they're cutting margin on the hope that volume follows. When a student has already loaded money into the ecosystem, the restaurant isn't discounting on hope. It's discounting against spend that has already been committed. That's why partners sign.</p>
+
+        <figure class="diagram">
           <svg class="dgm" viewBox="0 0 660 258" role="img" aria-label="Paying by card sends two to three percent of every sale to the card networks. With Liquid the student loads money before any meal, so the restaurant discounts against spend already committed.">
             <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" stroke="none"/></marker></defs>
             <defs><marker id="a2h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#EE4B28" stroke="none"/></marker></defs>
@@ -549,49 +442,206 @@ footer .lk{font-size:14.5px}
           <figcaption>Why a restaurant signs: it is not cutting margin on hope, it is cutting it against spend already sitting in the wallet.</figcaption>
         </figure>
 
-          <p>Restaurants near campus lose two to three percent of every transaction to interchange, and have almost no direct channel to students. Liquid gives them a cheaper rail and access to exactly the customers they want.</p>
+        <dl class="proof">
+          <div><dt>Partners live</dt><dd>3</dd></div>
+          <div><dt>Entity</dt><dd>Maryland LLC</dd></div>
+          <div><dt>Processor</dt><dd>Stripe, approved</dd></div>
+        </dl>
 
-          <aside class="sidenote">
-            <b>Plain English</b>
-            <p><strong>Interchange</strong> is the fee card networks take out of every card payment, typically 2 to 3%, charged to the merchant. For a deli on thin margins, that's real money.</p>
-            <p><strong>T+2 settlement</strong> means funds from a payment land in the merchant's bank two business days later, not instantly.</p>
-          </aside>
+        <ul class="partners">
+          <li>Marathon Deli</li>
+          <li>Pizza Kingdom</li>
+          <li>Craving Hour Halal</li>
+        </ul>
 
-          <p><strong>The deposit mechanic is what makes the discount real rather than promotional.</strong> A restaurant's biggest objection to discounting is uncertainty: they're cutting margin on the hope that volume follows. When a student has already loaded money into the ecosystem, the restaurant isn't discounting on hope. It's discounting against spend that has already been committed. That's why partners sign.</p>
+        <figure class="shot pull tilt-a">
+            <img src="img/liquid-map.webp" alt="Map of Liquid partner locations around College Park">
+            <div class="drop">img/liquid-map.webp</div>
+            <figcaption>Partners around campus, along Baltimore Avenue.</figcaption>
+          </figure>
 
-          <dl class="proof">
-            <div><dt>Partners live</dt><dd>3</dd></div>
-            <div><dt>Entity</dt><dd>Maryland LLC</dd></div>
-            <div><dt>Processor</dt><dd>Stripe, approved</dd></div>
-            <!-- HIGHEST-IMPACT ADDITION. Once you have the figure, paste this in above:
-            <div><dt>Transactions to date</dt><dd>312</dd></div>
-            <div><dt>Volume processed</dt><dd>$4,100</dd></div>
-            -->
-          </dl>
+        <ul class="links" style="margin-top:24px">
+          <li><a class="lk" data-link="liquid">Open Liquid</a></li>
+        </ul>
+      </div>
+    </article>
 
-          <ul class="partners">
-            <li>Marathon Deli</li>
-            <li>Pizza Kingdom</li>
-            <li>Craving Hour Halal</li>
-          </ul>
+    <article class="entry" id="smartmoney">
+      <h3>SmartMoney</h3>
+      <p class="tagline">An AI financial advisor that isn't allowed to do the math</p>
+      <div class="meta">
+        <p class="tag"><b>Shipped</b> &middot; solo build, deployed with CI/CD</p>
+        <p class="stack">React / Tailwind / Java Spring Boot / Groq API / LLaMA / Railway</p>
+      </div>
+      <ul class="links">
+        <li><a class="lk" data-link="smartmoney">Live demo</a></li>
+        <li><a class="lk" data-link="smartmoneyRepo">Source</a></li>
+      </ul>
 
-          <figure class="shot pull tilt-a">
-          <img src="img/liquid-map.webp" alt="Map of Liquid partner locations around College Park">
-          <div class="drop">img/liquid-map.webp</div>
-          <figcaption>Partners around campus, along Baltimore Avenue.</figcaption>
+      <div class="prose">
+        <p class="big">You give it your income, expenses and goals. It gives back a personalized budget and an optimal debt-payoff plan, computed from your actual numbers rather than pulled from a template.</p>
+
+        <figure class="shot wide tilt-a">
+            <img src="img/smartmoney-calculator.png" alt="The SmartMoney debt payoff calculator comparing avalanche, snowball and a recommended plan">
+            <div class="drop">img/smartmoney-calculator.png</div>
+            <figcaption>Three strategies costed against the same debts: avalanche, snowball, and what the extra payment buys you.</figcaption>
+          </figure>
+
+        <figure class="diagram">
+          <svg class="dgm" viewBox="0 0 640 290" role="img" aria-label="The model calls a tested financial library for every number. The chat answer and the on-screen figures both read from that one library, so they cannot disagree.">
+            <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" stroke="none"/></marker></defs>
+            <rect x="24" y="30" width="196" height="62"/>
+            <text x="122" y="56" text-anchor="middle" class="t">LLaMA model</text>
+            <text x="122" y="74" text-anchor="middle" class="sub">writes the words</text>
+            <g class="key">
+              <rect x="420" y="30" width="196" height="62"/>
+              <text x="518" y="56" text-anchor="middle" class="t">Financial library</text>
+              <text x="518" y="74" text-anchor="middle" class="sub">the only arithmetic</text>
+            </g>
+            <line x1="224" y1="49" x2="412" y2="49" marker-end="url(#a1)"/>
+            <text x="318" y="41" text-anchor="middle" class="lbl">calls with your numbers</text>
+            <line x1="416" y1="74" x2="228" y2="74" marker-end="url(#a1)"/>
+            <text x="318" y="90" text-anchor="middle" class="lbl">returns computed figures</text>
+            <line x1="122" y1="92" x2="122" y2="178" marker-end="url(#a1)"/>
+            <text x="132" y="138" class="lbl">phrases them</text>
+            <line x1="518" y1="92" x2="518" y2="178" marker-end="url(#a1)"/>
+            <text x="528" y="138" class="lbl">renders them</text>
+            <rect x="24" y="182" width="196" height="54"/>
+            <text x="122" y="214" text-anchor="middle" class="t">Chat answer</text>
+            <rect x="420" y="182" width="196" height="54"/>
+            <text x="518" y="214" text-anchor="middle" class="t">On-screen numbers</text>
+            <polyline points="122,236 122,262 518,262 518,236"/>
+            <text x="320" y="282" text-anchor="middle" class="lbl">one source, so they cannot disagree</text>
+          </svg>
+          <figcaption>The model never computes a figure. It calls the library and reports what comes back, which is why the chat and the interface can't contradict each other.</figcaption>
         </figure>
 
-          <ul class="links" style="margin-top:24px">
-            <li><a class="lk" data-link="liquid">Open Liquid</a></li>
-          </ul>
+        <figure class="shot wide tilt-b">
+            <img src="img/smartmoney-chat.webp" alt="SmartMoney chat explaining the avalanche strategy using the user’s own interest rates">
+            <div class="drop">img/smartmoney-chat.webp</div>
+            <figcaption>The same figures, phrased. It cites the 22.9% card because the library told it that is the expensive one.</figcaption>
+          </figure>
 
-          <p style="margin-top:30px"><strong class="lead-in">The hard part is not the app.</strong> Holding other people's money is a regulated activity. I had to work out whether our stored-value balances make us a money transmitter under Maryland law, which would require licensing we cannot realistically obtain as students, and I took that question directly to the Maryland Office of Financial Regulation rather than guessing. The answer shaped the product: how balances are held, how funds settle, and what we are legally permitted to call the thing.</p>
+        <p>Financial advice is either generic to the point of being useless, or expensive enough that the people who need it most can't afford it. SmartMoney was my attempt at the third option.</p>
 
-          <p>The payment flow runs on Stripe Connect using separate charges and transfers, which means understanding a T+2 settlement window and what it does to a restaurant's cash flow <em>before</em> promising anything in a sales meeting. I also had to navigate Apple's App Store rules on payments, where the exemption we rely on is narrow enough that getting it wrong means getting pulled.</p>
+        <figure class="shot pull tilt-b">
+            <img src="img/smartmoney-onboarding.webp" alt="The SmartMoney onboarding flow asking what comes in each month">
+            <div class="drop">img/smartmoney-onboarding.webp</div>
+            <figcaption>Setup asks in plain words: what comes in, what goes out, what you owe.</figcaption>
+          </figure>
 
-          <p><strong class="lead-in warn">The failure worth naming.</strong> Early on I counted verbal commitments from owners as signed partners, and built a launch timeline on top of them. An enthusiastic yes in a conversation is worth close to nothing until there is a signed merchant agreement and a configured terminal. We rebuilt the pipeline so that signatures and live transactions are the only milestones that count.</p>
+        <aside class="sidenote">
+          <b>Plain English</b>
+          <p><strong>Avalanche and snowball</strong> are the two standard ways to pay off several debts at once. Avalanche attacks the highest interest rate first and costs least overall. Snowball clears the smallest balance first and is easier to stick with.</p>
+          <p><strong>Tool-calling</strong> means the AI can't invent a number. When it needs one, it calls my function and reports what came back.</p>
+        </aside>
 
-          <p>Next is student-to-student transfers and delivery, so the wallet becomes the default way money moves on campus rather than a discount card.</p>
+        <p>The important architectural decision was that <strong>the model does not do arithmetic.</strong> I wrote the financial library myself, covering avalanche and snowball amortization, a health score and goal-feasibility projections, and the model reaches those functions through a tool-calling interface. The advice in the chat and the numbers in the interface come from the same tested code, so they cannot disagree with each other.</p>
+
+        <p><strong class="lead-in">What I learned.</strong> The hardest problem wasn't engineering, it was making the output feel human. Early versions were technically correct and tone-deaf, telling a student with $800 a month in income to "reduce discretionary spending," acknowledging nothing about their actual life. The quality of an AI output is almost entirely determined by the quality of what you hand it, and that changed how I approach AI products generally.</p>
+
+        <p><strong class="lead-in warn">The failure I overcame.</strong> I built the frontend and backend in parallel instead of designing the API contract first, and paid for it in integration friction I had personally created. I also underestimated how much edge-case handling financial data demands, because people's finances don't fit neatly into forms.</p>
+
+        <p>The sharpest failure came later. In live testing, the advisor produced a savings projection that was simply invented. Tracing it took longer than building the feature, and the cause turned out to be three unrelated bugs stacked on top of each other: an incomplete prompt constraint, a tool schema that instructed the model to omit a required parameter, and internal tool names leaking into user-facing text. I verified each fix against the live API rather than against mocks, since mocks would have cheerfully confirmed the broken behavior. That's why the safety constraints are now enforced by tests that fail the build if a guardrail is removed, instead of by a prompt I hope holds.</p>
+      </div>
+    </article>
+
+    <article class="entry" id="station-43">
+      <h3>Station 43</h3>
+      <p class="tagline">A recruitment site rewritten from the recruit's point of view</p>
+      <div class="meta">
+        <p class="tag"><b>Shipped</b> &middot; +50% applications, 20+ new volunteers</p>
+        <p class="stack">HTML / CSS / Adobe Suite / UX writing</p>
+      </div>
+
+      <div class="prose">
+        <p class="big">Our volunteer recruitment website was written for us, not for the person considering applying. I rebuilt it around them, and applications rose 50%.</p>
+
+        <figure class="shot wide tilt-a">
+          <img src="img/station43-home.webp" alt="The West Windsor Volunteer Fire Company No. 1 home page">
+          <div class="drop">img/station43-home.webp</div>
+          <figcaption>The rebuilt home page. A hundred years of the company, and one obvious way in.</figcaption>
+        </figure>
+
+        <figure class="shot pull tilt-b">
+          <img src="img/station43-signup.png" alt="The volunteer sign-up form">
+          <div class="drop">img/station43-signup.png</div>
+          <figcaption>The application itself: name, contact, address, and little else in the way.</figcaption>
+        </figure>
+
+        
+
+        <p>It assumed familiarity, buried the information that mattered, and put friction in front of someone applying for the first time. I redesigned it end to end: restructured the layout, rewrote the messaging from the prospective volunteer's perspective, and stripped every unnecessary step out of the application itself. We brought in more than 20 new volunteers.</p>
+
+        <p>I'm a volunteer firefighter there, so I had the unusual advantage of being both the person who built the site and the person who has to work alongside whoever it recruits.</p>
+
+        <p>This taught me more about product thinking than anything I've built since. Most sites fail not because the design is bad, but because they are written from the organization's point of view instead of the reader's. Ours was, and I had read it a hundred times without noticing.</p>
+      </div>
+    </article>
+
+    <article class="brief" id="returnflow">
+      <div>
+        <h3>ReturnFlow</h3>
+        <p class="tagline">Automating the worst part of buying things online</p>
+        <div class="meta">
+        <p class="tag"><b>Shipped</b> &middot; React Native, Flask, SQLAlchemy</p>
+      </div>
+      <div class="prose">
+        <p>A mobile-first platform that runs an e-commerce return from the moment a customer starts it to the moment it's resolved, replacing a process most retailers still handle over email. I built the React Native frontend, designed the REST API in Flask, and architected the database.</p>
+        <p><strong class="lead-in warn">The failure I overcame.</strong> I designed the schema around the simple case, and real-world data never is the simple case. Partial returns, split orders and status reversals all broke the model, and I refactored the schema completely mid-project. It cost me a week, and it permanently changed how I work: I now treat the schema as the most important design decision in any project, and the one I am least willing to rush.</p>
+      </div>
+    </article>
+
+    <article class="brief" id="klio">
+      <div>
+        <h3>Klio Care</h3>
+        <p class="tagline">Learning to be told no, on someone else's payroll</p>
+        <p class="tag"><b>Not code</b> &middot; ran the sales function</p>
+      </div>
+      <div class="prose">
+        <p>At a healthcare startup building home-health referral and order-signing workflows, I ran sales without a formal title: provider lead lists, pitch materials, outreach scripts, and field work across New Jersey, San Antonio and El Paso.</p>
+        <p>I contacted more than 500 doctors' offices and onboarded roughly 40. The conversion rate is the lesson. Most of the job is hearing no, adjusting the script, and going again, and I would much rather have learned that on someone else's payroll than on my own company's.</p>
+      </div>
+    </article>
+
+    <div class="quote">
+      <p>Built with intention, technology doesn't just automate a process. It reshapes how people connect with <i>institutions, and with each other.</i></p>
+    </div>
+
+  </div>
+
+  <!-- ===================== PART TWO ===================== -->
+  <section class="wrap opener" id="working">
+    <p class="num">Part two</p>
+    <h2>&ldquo;What are you working on?&rdquo;</h2>
+    <p>Getting Liquid the rest of the way, a licensing fight in New York, and two ideas behind them.</p>
+  </section>
+
+  <div class="wrap">
+
+    <article class="entry" id="liquid-business">
+      <h3>Liquid, the business</h3>
+      <p class="tagline">The half of it that isn't code</p>
+      <div class="meta">
+        <p class="tag"><b>In progress</b> &middot; licensing, settlement, distribution</p>
+      </div>
+
+      <div class="prose">
+        <p class="big">The app works. Most of what is left to build at Liquid is not software: it is the licensing question, the settlement timing, and getting signatures on paper.</p>
+
+        <aside class="sidenote">
+          <b>Plain English</b>
+          <p>A <strong>money transmitter</strong> licence is what a state requires before you may hold or move other people's money. It is slow and expensive to obtain.</p>
+          <p><strong>T+2 settlement</strong> means funds from a payment land in the merchant's bank two business days later, not instantly.</p>
+        </aside>
+
+        <p><strong class="lead-in">The hard part is not the app.</strong> Holding other people's money is a regulated activity. I had to work out whether our stored-value balances make us a money transmitter under Maryland law, which would require licensing we cannot realistically obtain as students, and I took that question directly to the Maryland Office of Financial Regulation rather than guessing. The answer shaped the product: how balances are held, how funds settle, and what we are legally permitted to call the thing.</p>
+
+        <p>The payment flow runs on Stripe Connect using separate charges and transfers, which means understanding a T+2 settlement window and what it does to a restaurant's cash flow <em>before</em> promising anything in a sales meeting. I also had to navigate Apple's App Store rules on payments, where the exemption we rely on is narrow enough that getting it wrong means getting pulled.</p>
+
+        <p><strong class="lead-in warn">The failure worth naming.</strong> Early on I counted verbal commitments from owners as signed partners, and built a launch timeline on top of them. An enthusiastic yes in a conversation is worth close to nothing until there is a signed merchant agreement and a configured terminal. We rebuilt the pipeline so that signatures and live transactions are the only milestones that count.</p>
+
+        <p>Next is student-to-student transfers and delivery, so the wallet becomes the default way money moves on campus rather than a discount card.</p>
       </div>
     </article>
 
@@ -599,7 +649,8 @@ footer .lk{font-size:14.5px}
       <h3>Ride Rite</h3>
       <p class="tagline">Zero-commission ride-hailing for New York's yellow taxis</p>
       <p class="tag"><b>In progress</b> &middot; app built, pursuing the E-Hail license</p>
-      <p class="stack">Expo / React Native / Supabase / Stripe</p>
+        <p class="stack">Expo / React Native / Supabase / Stripe</p>
+      </div>
       <ul class="links">
         <li><a class="lk" data-link="riderite">Source</a></li>
       </ul>
