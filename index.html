@@ -282,6 +282,23 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
   .shot.tilt-a,.shot.tilt-b{transform:none}
 }
 @media (prefers-reduced-motion:reduce){ .rise{animation:none} *{transition:none !important} }
+/* ---------- links ---------- */
+.links{display:flex;flex-wrap:wrap;gap:9px 22px;margin:0 0 26px;padding:0;list-style:none}
+.lk{
+  font-family:var(--sans);font-weight:600;font-size:13.5px;
+  color:var(--blue);text-decoration:none;
+  border-bottom:1.5px solid rgba(26,52,184,.32);padding-bottom:1px;
+  transition:color .15s,border-color .15s;
+}
+.lk:hover{color:var(--orange);border-bottom-color:var(--orange)}
+.lk::after{content:" \2197";font-size:.88em;opacity:.65}
+/* No href means no URL was supplied: never render a dead link. */
+.lk:not([href]){display:none}
+.links:not(:has(.lk[href])){display:none}
+.hero .links{margin-top:22px;margin-bottom:0}
+footer .links{margin:20px 0 0}
+footer .lk{font-size:14.5px}
+
 :focus-visible{outline:2px solid var(--orange);outline-offset:3px}
 </style>
 </head>
@@ -312,6 +329,11 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
       <b>140+</b> volunteer hours &nbsp;/&nbsp;
       ICS 100 &amp; 700 certified
     </p>
+    <ul class="links">
+      <li><a class="lk" data-link="github">GitHub</a></li>
+      <li><a class="lk" data-link="linkedin">LinkedIn</a></li>
+      <li><a class="lk" data-link="liquid">Liquid</a></li>
+    </ul>
   </section>
 
   <section class="wrap toc">
@@ -352,6 +374,10 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
       <p class="tagline">An AI financial advisor that isn't allowed to do the math</p>
       <p class="tag"><b>Shipped</b> &middot; solo build, deployed with CI/CD</p>
       <p class="stack">React / Tailwind / Java Spring Boot / Groq API / LLaMA / Railway</p>
+      <ul class="links">
+        <li><a class="lk" data-link="smartmoney">Live demo</a></li>
+        <li><a class="lk" data-link="smartmoneyRepo">Source</a></li>
+      </ul>
 
       <div class="prose">
         <p class="big">You give it your income, expenses and goals. It gives back a personalized budget and an optimal debt-payoff plan, computed from your actual numbers rather than pulled from a template.</p>
@@ -489,6 +515,10 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
             <li>Craving Hour Halal</li>
           </ul>
 
+          <ul class="links" style="margin-top:24px">
+            <li><a class="lk" data-link="liquid">Open Liquid</a></li>
+          </ul>
+
           <p style="margin-top:30px"><strong class="lead-in">The hard part is not the app.</strong> Holding other people's money is a regulated activity. I had to work out whether our stored-value balances make us a money transmitter under Maryland law, which would require licensing we cannot realistically obtain as students, and I took that question directly to the Maryland Office of Financial Regulation rather than guessing. The answer shaped the product: how balances are held, how funds settle, and what we are legally permitted to call the thing.</p>
 
           <p>The payment flow runs on Stripe Connect using separate charges and transfers, which means understanding a T+2 settlement window and what it does to a restaurant's cash flow <em>before</em> promising anything in a sales meeting. I also had to navigate Apple's App Store rules on payments, where the exemption we rely on is narrow enough that getting it wrong means getting pulled.</p>
@@ -508,6 +538,9 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
       <p class="tagline">Zero-commission ride-hailing for New York's yellow taxis</p>
       <p class="tag"><b>In progress</b> &middot; app built, pursuing the E-Hail license</p>
       <p class="stack">Expo / React Native / Supabase / Stripe</p>
+      <ul class="links">
+        <li><a class="lk" data-link="riderite">Source</a></li>
+      </ul>
 
       <div class="prose">
         <p class="big">Instead of taking 25 to 30% of every fare the way Uber and Lyft do, drivers pay a flat monthly subscription and keep the entire fare.</p>
@@ -584,6 +617,11 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
     <div class="wrap">
       <p class="sig">Nikhil Thota</p>
       <p>Computer Science at the University of Maryland. Co-founder of Liquid. Volunteer firefighter at Station 43, ICS 100 and ICS 700 certified.</p>
+      <ul class="links">
+        <li><a class="lk" data-link="github">GitHub</a></li>
+        <li><a class="lk" data-link="linkedin">LinkedIn</a></li>
+        <li><a class="lk" data-link="liquid">Liquid</a></li>
+      </ul>
       <p class="fine">Portfolio for Startup Shell, 2026</p>
     </div>
   </footer>
@@ -592,6 +630,28 @@ footer .fine{margin-top:18px;font-family:var(--sans);font-size:12.5px;color:var(
 
 <script>
 (function(){
+  /* ------------------------------------------------------------------
+     YOUR LINKS. Paste a URL between the quotes to switch a link on.
+     Anything left empty stays hidden, so the page never shows a dead
+     link. This is the only place you need to edit.
+     ------------------------------------------------------------------ */
+  var LINKS = {
+    github:         "https://github.com/nikhilthota2007",
+    linkedin:       "",   // e.g. https://www.linkedin.com/in/your-handle
+    liquid:         "",   // Liquid's site, App Store page, or TestFlight invite
+    smartmoney:     "",   // the deployed SmartMoney app
+    smartmoneyRepo: "",   // the SmartMoney repository
+    riderite:       ""    // the Ride Rite repository
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('.lk[data-link]'), function(a){
+    var url = LINKS[a.getAttribute('data-link')];
+    if (!url) return;                       // no href stays set, CSS keeps it hidden
+    a.setAttribute('href', url);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+  });
+
   // Photo slots: show the drop target when the image isn't there yet.
   var shots = document.querySelectorAll('.shot');
   Array.prototype.forEach.call(shots, function(fig){

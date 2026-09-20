@@ -24,6 +24,26 @@ is ever faked:
 Delete any `<figure class="shot">` block you don't want rather than leaving its
 placeholder visible.
 
+## Adding your links
+
+Open `index.html`, find the `LINKS` block at the top of the `<script>` near the
+bottom of the file, and paste a URL between the quotes:
+
+```js
+var LINKS = {
+  github:         "https://github.com/nikhilthota2007",
+  linkedin:       "",   // e.g. https://www.linkedin.com/in/your-handle
+  liquid:         "",   // Liquid's site, App Store page, or TestFlight invite
+  smartmoney:     "",   // the deployed SmartMoney app
+  smartmoneyRepo: "",   // the SmartMoney repository
+  riderite:       ""    // the Ride Rite repository
+};
+```
+
+Any entry left empty stays hidden and its row collapses, so the page never shows
+a dead link. Links appear in the hero, the footer, and under the project they
+belong to. GitHub is already filled in from this repository's remote.
+
 ## Adding Liquid's numbers
 
 The single highest-impact addition. Inside the Liquid section there is a commented
