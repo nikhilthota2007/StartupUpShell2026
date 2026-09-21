@@ -5,8 +5,6 @@ A single-page portfolio answering the Startup Shell application prompt.
 - **Part one, what I've built** — SmartMoney, Station 43, ReturnFlow, Klio Care.
 - **Part two, what I'm working on** — Liquid (live), Ride Rite, feedback routing,
   SmartMoney expanded.
-- **Why Startup Shell** — a closing section on what I want from the community and
-  what I can offer it.
 
 ## Images
 
